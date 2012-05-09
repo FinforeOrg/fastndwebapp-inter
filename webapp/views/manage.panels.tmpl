@@ -1,0 +1,65 @@
+<input type="radio" data-native="true" class="mtab" id="${category}-panel-${index}" name="${category}-panels" data-index="${index}" data-role="none">
+<label for="${category}-panel-${index}" class="mtab-selector">
+	${panel.name}
+</label>
+
+<div id="${category}-tab-${index}" class="mtab-content ui-body-c">
+	<div class="mtab-title ui-bar-a">
+		{{if category !== 'portfolio' && category !== 'keyword' && category !== 'linkedin' }}
+			<div data-role="controlgroup" data-type="horizontal" class="source-list-controls ui-btn-right">
+				<a href="#" data-role="button" data-icon="plus" data-iconpos="notext" data-theme="a" data-inline="true" class="add-custom-source">Add Custom Source</a>
+				<a href="#" data-role="button" data-icon="delete" data-iconpos="notext" data-theme="a" data-inline="true" class="remove-source">Remove Source</a>
+			</div>
+		{{/if}}
+		<span>
+			${panel.name}
+		</span>
+		
+		{{if category === 'twitter' && 1==2}}
+			<a href="http://twitter.com/${panel.account}" target="_blank" class="ui-corner-bottom" title="Connected Twitter Account">${panel.account}</a>
+		{{/if}}
+		
+	</div>
+	
+	
+	{{if category === 'portfolio'}}
+		<em class="extra-details">The list of Portfolios available in your Google Account will be visible here, <strong>after you reload the application. </strong></em>
+	{{else category == 'keyword' }}
+		<div class="keyword-panel-settings">			
+			<div data-role="fieldcontain">
+				<label for="keyword-text-${index}">Keyword</label>							
+				<input type="text" class="keyword-text" id="keyword-text-${index}" value="${panel.keyword_column.keyword}"/>
+			</div>
+			
+			<!--
+				<div data-role="fieldcontain">
+					<label for="keyword-followers-${index}">Number of followers</label>
+					<select class="keyword-followers" id="keyword-followers-${index}">
+						<option value="0" {{if panel.keyword_column.follower == 0}} selected="selected" {{/if}}>Any number of followers</option>
+						<option value="100" {{if panel.keyword_column.follower == 100}} selected="selected" {{/if}}>At least 100 followers</option>
+						<option value="1000" {{if panel.keyword_column.follower == 1000}} selected="selected" {{/if}}>At least 1000 followers</option>
+					</select>
+				</div>
+				
+				<div data-role="fieldcontain">					
+					<fieldset data-role="controlgroup">
+						<legend>&nbsp;</legend>
+						<input type="checkbox" id="keyword-aggregate-${index}" class="keyword-aggregate" {{if panel.keyword_column.is_aggregate}} checked="checked" {{/if}}/>
+						<label for="keyword-aggregate-${index}">Is aggregate</label>
+					</fieldset>						
+				</div>
+			-->
+			
+			<div data-role="fieldcontain" class="keyword-save-container">
+				<button class="keyword-save">Save Column</button>
+			</div>			
+		</div>	
+	{{else}}
+		<div class="list-view">
+		{{each panel.user_feeds}}
+			<input type="radio" data-native="true" name="${category}-sources-${$value.feed_account_id}" id="${$value._id}" {{if $index == 0}}checked="checked"{{/if}} data-role="none" />
+			<label for="${$value._id}">${$value.title}</label>
+		{{/each}}
+		</div>
+	{{/if}}
+</div>

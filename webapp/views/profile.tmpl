@@ -1,0 +1,86 @@
+<div id="profile-page" data-role="dialog" class="small-dialog {{if updateProfile}} update-profile{{/if}}">
+	<div data-role="header">
+		<h1>Professional Account Information</h1>
+	</div>
+	<div data-role="content" data-theme="c">		
+	
+		{{if updateProfile}}
+		<div class="social-signin">
+			<p>Connect your FastND account with your social networking accounts</p>
+			
+			<div data-role="controlgroup" data-type="horizontal">				
+				<a class="google-profile-connect" data-type="google" data-role="button" data-icon="google" data-inline="true">Google</a>
+				<a class="twitter-profile-connect" data-type="twitter" data-role="button" data-icon="twitter" data-inline="true">Twitter</a>
+				<a class="linkedin-profile-connect" data-type="linkedin" data-role="button" data-icon="linkedin" data-inline="true">Linkedin</a>
+			</div>
+		</div>
+		
+			<em>Since this is your first time using FastND, please take a moment to update your profile. </em>
+		{{/if}}
+	
+		<form>
+			<div data-role="fieldcontain">
+				<label for="full_name">Full Name</label>
+				<input type="text" name="full_name" id="full_name" value="${user.full_name}" required>
+			</div>
+			
+			{{if !updateProfile}}
+			<div data-role="fieldcontain">
+				<label for="email_work">Work Email:</label>
+				<input type="email" name="email_work" id="email_work" value="${user.email_work}" required>
+			</div>
+			{{/if}}
+			
+			{{if !updateProfile}}
+				<div data-role="fieldcontain">
+					<label for="password">New Password:</label>
+					<input type="password" name="password" id="password" value=""  />
+				</div>
+				
+				<div data-role="fieldcontain">
+					<label for="password_confirmation">Confirm Password:</label>
+					<input type="password" name="password_confirmation" id="password_confirmation" value="" />
+				</div>
+			{{/if}}
+			
+			<div data-role="fieldcontain">	
+				<label for="user_geographic">${focus.geographic.title}</label>
+				<select id="user_geographic" name="profile_ids" multiple="multiple" data-native-menu="false">
+					<option>Choose focus areas</option>
+					{{each focus.geographic.profiles}}
+						${currentFocusId = $value._id}
+						<option value="${$value._id}" {{each selectedFocus.geographic}} {{if $value._id === currentFocusId}} selected="selected" {{/if}} {{/each}}>${$value.title}</option>
+					{{/each}}
+				</select>				
+			</div>
+			
+			<div data-role="fieldcontain">
+				<label for="user_profession">${focus.professional.title}</label>
+				<select id="user_profession" name="profile_ids" multiple="multiple" data-native-menu="false">
+					<option>Choose focus areas</option>
+					{{each focus.professional.profiles}}
+						${currentFocusId = $value._id}
+						<option value="${$value._id}" {{each selectedFocus.professional}} {{if $value._id === currentFocusId}} selected="selected" {{/if}} {{/each}}>${$value.title}</option>
+					{{/each}}
+				</select>
+			</div>
+			
+			<div data-role="fieldcontain">
+				<label for="user_industry">${focus.industrial.title}</label>
+				<select id="user_industry" name="profile_ids" multiple="multiple" data-native-menu="false">
+					<option>Choose focus areas</option>
+					{{each focus.industrial.profiles}}
+						${currentFocusId = $value._id}
+						<option value="${$value._id}" {{each selectedFocus.industrial}} {{if $value._id === currentFocusId}} selected="selected" {{/if}} {{/each}}>${$value.title}</option>
+					{{/each}}
+				</select>
+			</div>			
+							
+			<div data-role="fieldcontain">					
+				<button type="submit" data-icon="check" data-theme="e" class="ui-block-a">Save Changes</button>					
+			</div>
+		</form>
+	
+	</div>
+	
+</div>

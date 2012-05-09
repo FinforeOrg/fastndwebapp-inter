@@ -1,0 +1,114 @@
+<div id="signup-page" data-role="dialog" class="small-dialog">
+	<div data-role="header">
+		<h1>Sign up for FastND</h1>
+	</div>
+	<div data-role="content" data-theme="c">		
+		<div id="signup-page1">
+			<div class="social-signin">
+				<p>Already have an account on these services? Sign in with: </p>
+				
+				{{if !smallScreen}}
+					<div data-role="controlgroup" data-type="horizontal">
+						<a href="${finforeBaseUrl}/auth/google?callback=${finforeAppUrl}socialcallback.html" data-role="button" data-icon="google" data-inline="true">Google</a>
+						<a href="${finforeBaseUrl}/auth/facebook?callback=${finforeAppUrl}socialcallback.html" data-role="button" data-icon="facebook" data-inline="true">Facebook</a>
+						<a href="${finforeBaseUrl}/auth/twitter?callback=${finforeAppUrl}socialcallback.html" data-role="button" data-icon="twitter" data-inline="true">Twitter</a>
+						<a href="${finforeBaseUrl}/auth/linkedin?callback=${finforeAppUrl}socialcallback.html" data-role="button" data-icon="linkedin" data-inline="true">Linkedin</a>
+					</div>
+				{{/if}}
+				
+				{{if smallScreen}}
+					<fieldset class="ui-grid-a">
+						<div class="ui-block-a">
+								<a href="${finforeBaseUrl}/auth/google?callback=${finforeAppUrl}socialcallback.html" data-role="button" data-icon="google">Google</a>
+						</div>
+						<div class="ui-block-b">
+							<a href="${finforeBaseUrl}/auth/facebook?callback=${finforeAppUrl}socialcallback.html" data-role="button" data-icon="facebook">Facebook</a>
+						</div>
+					</fieldset>
+					<fieldset class="ui-grid-a">
+						<div class="ui-block-a">
+								<a href="${finforeBaseUrl}/auth/twitter?callback=${finforeAppUrl}socialcallback.html" data-role="button" data-icon="twitter">Twitter</a>
+						</div>
+						<div class="ui-block-b">
+							<a href="${finforeBaseUrl}/auth/linkedin?callback=${finforeAppUrl}socialcallback.html" data-role="button" data-icon="linkedin">Linkedin</a>
+						</div>
+					</fieldset>
+				{{/if}}
+			</div>
+			
+			<form class="new_user" id="new_user"> 
+				<div data-role="fieldcontain">
+					<label for="full_name">Full Name</label>					
+					<input type="text" name="user[full_name]" id="full_name" value="" required />
+				</div>
+				
+				<div data-role="fieldcontain">  
+					<label for="user_email_work">Email</label>
+					<input id="user_email_work" name="user[email_work]" size="30" type="email" required />
+				</div>
+				
+				<div data-role="fieldcontain">
+					<label for="user_password">Password</label>
+					<input id="user_password" name="user[password]" size="30" type="password" required />
+				</div>
+
+				<div data-role="fieldcontain">
+					<label for="user_password_confirmation">Password confirmation</label>
+					<input id="user_password_confirmation" name="user[password_confirmation]" size="30" type="password" required />
+				</div>
+				
+				<div data-role="fieldcontain">	
+					<label for="user_geographic">${focus.geographic.title}</label>
+					<select id="user_geographic" name="user[profile_ids][]" multiple="multiple" data-native-menu="false" required>
+						<option>Choose focus areas</option>
+						{{each focus.geographic.profiles}}
+							<option value="${$value._id}">${$value.title}</option>
+						{{/each}}
+					</select>
+				</div>
+				
+				<div data-role="fieldcontain">
+					<label for="user_profession">${focus.professional.title}</label>
+					<select id="user_profession" name="user[profile_ids][]" multiple="multiple" data-native-menu="false" required>
+						<option>Choose focus areas</option>
+						{{each focus.professional.profiles}}
+							<option value="${$value._id}">${$value.title}</option>
+						{{/each}}
+					</select>
+				</div>
+				
+				<div data-role="fieldcontain">
+					<label for="user_industry">${focus.industrial.title}</label>
+					<select id="user_industry" name="user[profile_ids][]" multiple="multiple" data-native-menu="false" required>
+						<option>Choose focus areas</option>
+						{{each focus.industrial.profiles}}
+							<option value="${$value._id}">${$value.title}</option>
+						{{/each}}
+					</select>
+				</div>
+				
+				<input id="user_submit" name="commit" type="submit" value="Signup for a FastND Account" data-theme="b" /> 
+			</form> 
+		</div>
+		
+		<div id="signup-page2">
+			<div class="left-column">
+				<h2>Please connect your FastND account with the following providers</h2>
+			</div>
+			
+			<div class="right-column">
+				<a class="twitter-connect-button" data-type="twitter">Connect with Twitter</a>				
+				
+				<!--
+				<a class="facebook-connect-button">Connect with Facebook</a>
+				-->
+				
+				<a class="linkedin-connect-button" data-type="linkedin">Connect with Linkedin</a>				
+				<a class="google-connect-button" data-type="google">Connect with Google</a>				
+			</div>
+			
+			<a id="finish-btn" data-role="button" data-icon="check" data-theme="b">Finish setting up your FastND account</a>
+		</div>
+		
+	</div>
+</div>

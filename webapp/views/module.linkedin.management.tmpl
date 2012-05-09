@@ -1,0 +1,32 @@
+<div class="ui-header ui-bar-b">
+	<strong>LinkedIn Management</strong>
+	<span>Get the latest business news from LinkedIn and manage it. </span>
+</div>
+<div class="manage-content">		
+	<div class="mtabs-container">
+		
+		{{each panels}}		
+			<input type="radio" data-native="true" class="mtab" id="linkedin-panel-${$index}" name="linkedin-panels" {{if $index == 0}}checked="checked"{{/if}} data-index="${$index}" data-role="none">
+			<label for="linkedin-panel-${$index}" class="mtab-selector">
+				${$value.feed_account.name}
+			</label>			
+		{{/each}}	
+	
+	</div>
+	
+	<div class="linkedin-management-details ui-body-c">				
+		<p>You can add a new <strong>LinkedIn</strong> column using the <strong>Add Column</strong> button in the left side of the footer. </p>		
+	</div>
+	
+</div>
+
+<div data-role="footer">
+	<div class="panel-controls">
+		<a href="#" data-role="button" data-icon="plus" class="add-column">Add Column</a>
+		
+		<div data-role="controlgroup" data-type="horizontal">
+			<a href="#" data-role="button" data-icon="edit" data-iconpos="notext" data-inline="true" class="edit-column-title">Edit Title</a>
+			<a href="#" data-role="button" data-icon="delete" data-iconpos="notext" data-inline="true" class="remove-column">Delete Column</a>
+		</div>
+	</div>
+</div>

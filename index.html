@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8" />
+	<title>FastND.Intermediate</title>
+	<meta http-equiv="X-UA-Compatible" content="chrome=1" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	
+	<meta name="apple-mobile-web-app-capable" content="yes" />
+	<link rel="shortcut icon" href="favicon.ico" />	
+	<!-- For iPhone 4 with high-resolution Retina display: -->
+	<link rel="apple-touch-icon-precomposed" sizes="114x114" href="apple-touch-icon-114x114-precomposed.png">
+	<!-- For first-generation iPad: -->
+	<link rel="apple-touch-icon-precomposed" sizes="72x72" href="apple-touch-icon-72x72-precomposed.png">
+	<!-- For non-Retina iPhone, iPod Touch, and Android 2.1+ devices: -->
+	<link rel="apple-touch-icon-precomposed" href="apple-touch-icon-precomposed.png">
+	
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+</head>
+<body>
+	
+	<!--[if lte IE 8]>
+	<script type="text/javascript">
+		function hideBrowserNotice() {			
+			var notice = document.getElementById('brower-upgrade-notice');
+			var overlay = document.getElementById('brower-upgrade-notice-overlay');
+			notice.parentNode.removeChild(notice);
+			overlay.parentNode.removeChild(overlay);			
+			
+			return false;
+		};
+		
+		// suppress all error messages on lte IE8 and do nothing with them:		
+		function noErrorMessages () { return true; }
+		window.onerror = noErrorMessages;
+	</script>	
+	<div id="brower-upgrade-notice-overlay"></div>
+	<div id="brower-upgrade-notice">
+		<h2>We're sorry, your web browser doesn’t support Finfore.net</h2>
+		<p>Our web application requires certain features that are only present in modern web browsers. </p>
+		
+		<div class="other-browser">
+			<p>Download the latest version of one of the following browsers: </p>
+			<ul>
+				<li><a href="http://www.google.com/chrome" target="_blank" class="chrome-browser">Google Chrome</a></li>
+				<li><a href="http://www.mozilla.com/en-US/firefox/" target="_blank" class="firefox-browser">Mozilla Firefox</a></li>
+				<li><a href="http://www.opera.com/" target="_blank" class="opera-browser">Opera</a></li>
+				<li><a href="http://www.apple.com/safari/" target="_blank" class="safari-browser">Safari</a></li>
+			</ul>
+		</div>
+		<div class="upgrade-ie">
+			<p>Or upgrade to <br /> Internet Explorer 9</p>			
+			<a href="http://windows.microsoft.com/ie9" target="_blank" class="ie-browser">Internet Explorer 9</a>
+		</div>
+		
+		<a href="#" class="proceed-anyway" onclick="hideBrowserNotice();">Proceed at your own risk, without upgrading your browser. <br/> Notice: It's very possible that the application won't run at all! </a>
+	</div>
+	<![endif]-->
+	
+	<div data-role="page"></div>
+	<!-- Finfore.net Core -->
+	<script type="text/javascript" src="webapp/config.js"></script>
+	<script type="text/javascript" src="steal/steal.production.js"></script>
+	<script>
+		if(document.documentElement.clientWidth <= 699) {
+			var smallScreen = true;
+			steal('webapp/mobile/production.js', 'webapp/mobile/production.css');
+		} else {
+			steal('webapp/production/production.js', 'webapp/production/production.css');
+		};
+	</script>
+
+</body>
+</html>

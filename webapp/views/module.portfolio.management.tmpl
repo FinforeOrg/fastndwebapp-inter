@@ -1,0 +1,48 @@
+<div class="ui-header ui-bar-b">
+	<strong>Portfolio Management</strong>
+	<span>Collections of positions that the user holds in various securities, plus metadata, using Google Finance </span>
+</div>
+<div class="manage-content">		
+	<div class="mtabs-container">
+		
+		{{each portfolios}}
+			<input type="radio" data-native="true" class="mtab" id="portfolio-account-${$index}" name="portfolio-panels" {{if $index == 0}}checked="checked"{{/if}} data-index="${$index}" data-role="none">
+			<label for="portfolio-account-${$index}" class="mtab-selector">
+				${$value.feed_account.name}
+			</label>
+			
+			<div id="portfolio-tab-${$index}" class="mtab-content ui-body-c {{if $index == 0}}visible-tab{{/if}}">
+				<div class="mtab-title ui-bar-a">					
+					<span>${$value.feed_account.name}</span>
+				</div>
+				
+				<em class="extra-details">Portfolios available in your Google Account</em>
+				
+				<span style="display: none">${feed_account_id = $value.feed_account._id}</span>
+				<div class="list-view">
+					{{each $value.list}}
+						<input type="radio" data-native="true" name="portfolio-sources-${feed_account_id}" id="source-${$value.id_bare}" data-id="${$value.id_bare}" data-index="${$index}" {{if $index == 0}}checked="checked"{{/if}} data-role="none">
+						<label for="source-${$value.id_bare}">${$value.title}</label>
+					{{/each}}
+				</div>
+			</div>
+		{{/each}}	
+	
+	</div>
+	
+	<div class="module-details">
+		
+	</div>
+	
+</div>
+
+<div data-role="footer">
+	<div class="panel-controls">
+		<a href="#" data-role="button" data-icon="plus" class="add-portfolio">Add Portfolio</a>
+		
+		<div data-role="controlgroup" data-type="horizontal">
+			<a href="#" data-role="button" data-icon="edit" data-iconpos="notext" data-inline="true" class="edit-portfolio">Edit Portfolio</a>
+			<a href="#" data-role="button" data-icon="delete" data-iconpos="notext" data-inline="true" class="remove-portfolio">Delete Portfolio</a>
+		</div>
+	</div>
+</div>

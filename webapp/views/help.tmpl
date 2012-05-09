@@ -1,0 +1,40 @@
+<div data-role="dialog" class="small-dialog help-page">
+	<div data-role="header">
+		<h1>Help</h1>
+	</div>
+	
+	<div data-role="content" data-theme="c">
+	
+		<form>		
+			<div data-role="fieldcontain">
+				<label for="subject">Subject:</label>
+				<input type="text" name="form[subject]" id="subject" value="" required>
+			</div>
+
+			<div data-role="fieldcontain">
+				<label for="message">Message:</label>
+				<textarea id="message" name="form[message]" required></textarea>
+			</div>
+			
+			<div data-role="fieldcontain">
+				<label for="name">Name:</label>
+				<input type="text" name="form[name]" id="name" value="" required>
+			</div>
+			
+			<div data-role="fieldcontain">
+				<label for="phone">Phone:</label>
+				<input type="tel" name="form[phone]" id="phone" value="">
+			</div>
+			
+			<div data-role="fieldcontain">
+				<label for="email">Email:</label>
+				<input type="email" name="form[email]" id="email" value="" required>
+			</div>
+			
+			<div data-role="fieldcontain">					
+				<button type="submit" data-icon="check" data-theme="e" class="ui-block-a">Send Message</button>
+			</div>
+		</form>
+	
+	</div>	
+</div>

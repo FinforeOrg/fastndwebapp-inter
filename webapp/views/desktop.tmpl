@@ -1,0 +1,173 @@
+<div id="desktop" data-role="page">
+	{{if blankState}}
+	<div id="blank-state-overlay"></div>
+	{{/if}}
+	
+	<div data-role="header">
+		{{if !user || user.is_public}}
+			<div id="signin-actions" data-role="controlgroup" data-type="horizontal">
+				<a id="login-button" data-rel="dialog" data-transition="slidedown" data-role="button" data-theme="b">Login</a>
+				<a id="signup-button" data-rel="dialog" data-transition="slidedown" data-role="button" data-theme="a">Register</a>
+				{{if !tablet}}
+					<a id="find-company-button" data-role="button" data-theme="a">Lookup a Company</a>
+				{{/if}}
+			</div>
+		{{/if}}
+		
+		<div class="desktop-title">
+			<h1>FastND</h1>		
+			{{if user && !user.is_public}}
+				<p id="welcome-message">Hi, <strong>${user.full_name}</strong></p>
+			{{/if}}
+		</div>
+		
+		{{if (user && !user.is_public)}}
+			<div id="header-buttons">				
+				{{if tablet}}
+					<a ontouchstart="" class="add-company-button">Profile</a>
+				{{/if}}
+				
+				<a ontouchstart="" id="profile-button" data-tooltip="User Profile">Profile</a>
+				<a ontouchstart="" id="manage-button" data-tooltip="Manage Columns" class="disabled">Manage Columns</a>
+				<a ontouchstart="" class="help-button" data-tooltip="Get Help">Help</a>
+				<a ontouchstart="" class="logout-button" data-tooltip="Log out of Finfore">Logout</a>
+			</div>
+		{{else}}
+			<div id="public-account-selectors">
+				{{if tablet}}
+					<a id="find-company-button" data-role="button" data-icon="search">Lookup a Company</a>
+				{{/if}}
+				
+				{{if !tablet}}
+					<p>Try out some of our public accounts by selecting your areas of focus</p>
+					<form>
+						<div data-role="fieldcontain">
+							<label for="profession">${focus.professional.title}</label>
+							<select name="user[profession]" id="profession">
+								{{each focus.professional.profiles}}
+									${currentFocusId = $value._id}
+									<option value="${$value._id}" {{each selectedFocus.professional}} {{if $value._id === currentFocusId}} selected="selected" {{/if}} {{/each}}>${$value.title}</option>
+								{{/each}}
+							</select>
+						</div>
+						<div data-role="fieldcontain">
+							<label for="industry">${focus.industrial.title}</label>
+							<select name="user[industry]" id="industry">
+								{{each focus.industrial.profiles}}
+									${currentFocusId = $value._id}
+									<option value="${$value._id}" {{each selectedFocus.industrial}} {{if $value._id === currentFocusId}} selected="selected" {{/if}} {{/each}}>${$value.title}</option>
+								{{/each}}
+							</select>
+						</div>
+						<div data-role="fieldcontain">
+							<label for="geographic">${focus.geographic.title}</label>
+							<select name="user[geographic]" id="geographic">
+								${isSelected = false}
+								{{each focus.geographic.profiles}}
+									${currentFocusId = $value._id}
+									<option value="${$value._id}" {{each selectedFocus.geographic}} {{if $value._id === currentFocusId}} selected="selected" ${isSelected = true} {{/if}} {{/each}} {{if (isSelected == false && $value.title == 'USA & Canada')}} selected="selected" {{/if}}>${$value.title}</option>
+								{{/each}}
+							</select>
+						</div>
+					</form>
+					<button data-theme="a" data-icon="arrow-r" id="public-account-selector-btn">Try account</button>
+				{{else}}
+					<button data-theme="a" data-icon="arrow-r" id="public-account-selector-btn">Use a Public Account</button>
+				{{/if}}
+			</div>
+		{{/if}}
+		
+		
+		{{if !tablet}}
+		<div id="tabs-container">
+			<a data-role="button" data-icon="arrow-l" data-iconpos="notext" title="Scroll left" id="tab-scroll-left">Scroll left</a>
+			<div id="tab-bar">
+				<ul></ul>
+			</div>
+			<a data-role="button" data-icon="arrow-r" data-iconpos="notext" title="Scroll right" id="tab-scroll-right">Scroll right</a>
+			{{if user && !user.is_public}}
+				<a id="add-tab-button" data-icon="plus" data-iconpos="notext" data-tooltip="Add a new company" data-role="button" class="tooltip-top add-company-button">Add a new company</a>
+			{{/if}}
+		</div>
+		
+		<select name="tab-list-selector" id="tab-list-selector" data-iconpos="notext" data-native-menu="false" data-theme="a"></select>
+		{{/if}}
+		
+	</div>
+	
+	{{if tablet}}
+		<div class="tablet-tab-selector" id="tablet-tabs">
+			<div class="tablet-selector-wrapper">
+				<div class="tablet-tab-list">
+					{{if user && !user.is_public && 1 === 2}}
+						<a data-icon="plus" data-role="button" class="add-company-button" data-theme="a">Add a new company</a>
+					{{/if}}
+				</div>
+			</div>
+		</div>
+	{{/if}}
+	
+	<div id="desktop-content" data-role="content"></div>
+	<div data-role="footer">
+		<div class="scrolling-ticker"></div>		
+	</div>
+</div>
+
+{{if blankState}}
+<div id="blank-state" class="ui-body-c ui-corner-all">
+	<div class="ui-bar-a ui-corner-top"><h1>Welcome to <strong>FastND</strong></h1></div>
+	<div class="ui-content">		
+		<p>Please try out some of our public profiles, by selecting different focus areas from these selectors. </p>
+		<p>If you like our service, please register for an account, using the button on the top left, after closing this message. </p>
+		<form>
+			<label>
+				<input type="checkbox" name="show-blank-state" id="show-blank-state" />
+				Don't show this message again
+			</label>
+			<a data-role="button" data-icon="delete" data-inline="true" data-theme="a" id="blank-state-close-btn">Close popup</a>
+		</form>
+	</div>
+</div>
+{{/if}}
+
+{{if !user || user.is_public}}
+<div id="public-account-selector" data-role="dialog" data-theme="a" data-content-theme="c" class="small-dialog">
+	<div data-role="header">
+		<h1>Public Accounts</h1>
+	</div>
+	
+	<div data-role="content">
+		<p>Try out some of our public accounts by selecting your areas of focus</p>
+		<form>
+			<div data-role="fieldcontain">
+				<label for="profession">${focus.professional.title}</label>
+				<select name="user[profession]" id="profession">
+					{{each focus.professional.profiles}}
+						${currentFocusId = $value._id}
+						<option value="${$value._id}" {{each selectedFocus.professional}} {{if $value._id === currentFocusId}} selected="selected" {{/if}} {{/each}}>${$value.title}</option>
+					{{/each}}
+				</select>
+			</div>
+			<div data-role="fieldcontain">
+				<label for="industry">${focus.industrial.title}</label>
+				<select name="user[industry]" id="industry">
+					{{each focus.industrial.profiles}}
+						${currentFocusId = $value._id}
+						<option value="${$value._id}" {{each selectedFocus.industrial}} {{if $value._id === currentFocusId}} selected="selected" {{/if}} {{/each}}>${$value.title}</option>
+					{{/each}}
+				</select>
+			</div>
+			<div data-role="fieldcontain">
+				<label for="geographic">${focus.geographic.title}</label>
+				<select name="user[geographic]" id="geographic">
+					{{each focus.geographic.profiles}}
+						${currentFocusId = $value._id}
+						<option value="${$value._id}" {{each selectedFocus.geographic}} {{if $value._id === currentFocusId}} selected="selected" {{/if}} {{/each}}>${$value.title}</option>
+					{{/each}}
+				</select>
+			</div>
+		</form>
+		<button data-theme="b" data-icon="arrow-r" data-iconpos="right" class="public-account-selector-btn">Try account</button>
+	</div>	
+</div>
+{{/if}}

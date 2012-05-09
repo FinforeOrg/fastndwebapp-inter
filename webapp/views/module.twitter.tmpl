@@ -1,0 +1,13 @@
+{{if !connected}}
+	<a class="twitter-connect-button">Connect with Twitter</a>
+{{/if}}
+
+<ul class="tweets"></ul>
+
+{{if connected}}
+	<ul data-role="listview" class="load-more-container">
+		<li data-icon="false" data-theme="d">
+			<a class="load-more-tweets">Load more...</a>
+		</li>
+	</ul>
+{{/if}}

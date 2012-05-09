@@ -1,0 +1,4 @@
+{{each feeds}}
+	<input type="radio" name="${type}-preset-sources" id="source-${$value._id}" data-address="${$value.address}" class="preset-source" value="${$value._id}" data-role="none">
+	<label for="source-${name}-${$value._id}">${$value.title}</label>
+{{/each}}

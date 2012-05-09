@@ -1,0 +1,18 @@
+<div id="add-company-page" data-role="dialog" class="small-dialog">
+	<div data-role="header">
+		<h1>Add a new company</h1>		
+	</div>
+	<div data-role="content" data-theme="c">
+		<ul data-role="listview" data-filter="true" class="companies-list"> 
+		{{each companies}}
+			<li data-index="${$index}">
+				<span class="ui-icon ui-icon-plus"></span>
+				${$value.title}
+				{{each $value.profiles}}
+					<span class="ui-li-count">${$value.title}</span>					
+				{{/each}}
+			</li>
+		{{/each}}
+		</ul>
+	</div>
+</div>

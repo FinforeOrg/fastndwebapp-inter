@@ -1,0 +1,66 @@
+<div id="login-page" data-role="dialog" class="small-dialog" data-theme="a" data-content-theme="c">
+	<div data-role="header">
+		<h1>
+			{{if smallScreen}}
+				Sign-In
+			{{else}}
+				Welcome to 
+				<strong>FastND</strong>
+			{{/if}}
+		</h1>
+	</div>
+	<div data-role="content">
+		
+		{{if smallScreen}}
+			<a data-role="button" data-theme="a" class="public-account-btn" data-icon="arrow-r" data-iconpos="right">Use a Public Account</a>
+			<hr />
+			<p class="separator-text">OR</p>
+		{{/if}}
+		
+		<form id="new_user_session" data-ajax="false">
+			<div data-role="fieldcontain">
+				<label for="login">Username</label>
+				<input type="text" name="user_session[login]" id="login" value="" />
+			</div>
+			<div data-role="fieldcontain">
+				<label for="password">Password</label>
+				<input type="password" name="user_session[password]" id="password" value="" />
+			</div>			
+			
+			{{if smallScreen}}
+				<div data-role="controlgroup" data-type="horizontal">
+					<a data-role="button" data-theme="b" id="signup-button">Register</a>
+			{{/if}}
+			
+			<button type="submit" data-role="button" data-theme="a" id="signin-button">Login</button>
+			
+			{{if smallScreen}}
+				</div>
+			{{/if}}
+			
+			<a class="forgot-password">Forgot your password?</a>
+			
+			<hr />
+			<p class="separator-text">OR</p>
+			
+			<div class="social-signin">
+				<p>Sign-in with your account at: </p>
+				
+					<div data-role="controlgroup" data-type="horizontal">
+						<a href="${finforeBaseUrl}/auth/google?callback=${finforeAppUrl}socialcallback.html" data-role="button" data-icon="google" data-inline="true">Google</a>
+						<a href="${finforeBaseUrl}/auth/facebook?callback=${finforeAppUrl}socialcallback.html" data-role="button" data-icon="facebook" data-inline="true">Facebook</a>
+						
+				{{if smallScreen}}
+					</div>
+					<div data-role="controlgroup" data-type="horizontal">
+				{{/if}}
+						
+						<a href="${finforeBaseUrl}/auth/twitter?callback=${finforeAppUrl}socialcallback.html" data-role="button" data-icon="twitter" data-inline="true">Twitter</a>
+						<a href="${finforeBaseUrl}/auth/linkedin?callback=${finforeAppUrl}socialcallback.html" data-role="button" data-icon="linkedin" data-inline="true">Linkedin</a>
+					</div>
+			</div>
+			
+		</form>
+				
+	</div>
+</div>

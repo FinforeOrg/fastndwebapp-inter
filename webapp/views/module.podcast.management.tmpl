@@ -1,0 +1,70 @@
+<div class="ui-header ui-bar-b">
+	<strong>Podcast Management</strong>
+	<span>Manage your video, radio, and any multimedia regarding your business points. </span>
+</div>
+
+<div class="manage-content">		
+	<div class="mtabs-container">
+		
+		{{each panels}}			
+			<input type="radio" data-native="true" class="mtab" id="podcast-panel-${$index}" name="podcast-panels" {{if $index == 0}}checked="checked"{{/if}} data-index="${$index}" data-role="none">
+			<label for="podcast-panel-${$index}" class="mtab-selector">
+				${$value.feed_account.name}
+			</label>
+			
+			<div id="podcast-tab-${$index}" class="mtab-content ui-body-c {{if $index == 0}}visible-tab{{/if}}">
+				<div class="mtab-title ui-bar-a">
+					<div data-role="controlgroup" data-type="horizontal" class="source-list-controls">
+						<a href="#" data-role="button" class="add-custom-source" data-iconpos="notext" data-icon="plus" data-inline="true">Add Custom Source</a>
+						<a href="#" data-role="button" class="remove-source" data-iconpos="notext" data-icon="delete" data-inline="true">Remove Source</a>
+					</div>
+					<span>${$value.feed_account.name}</span>
+				</div>
+				<div class="list-view">
+					<span style="display: none">${feed_account_id = $value.feed_account._id}</span>
+					{{each $value.feed_account.user_feeds}}
+						<input type="radio" data-native="true" name="podcast-sources-${feed_account_id}" id="source-${feed_account_id}-${$value._id}" data-id="${$value._id}" data-index="${$index}" {{if $index == 0}}checked="checked"{{/if}} data-role="none">
+						<label for="source-${feed_account_id}-${$value._id}">{{if $value.feed_info && $value.feed_info.title}} ${$value.feed_info.title} {{else}} ${$value.name} {{/if}}</label>
+					{{/each}}
+				</div>
+			</div>
+		{{/each}}	
+	
+	</div>	
+		
+	<div class="preset-tabs ui-corner-all ui-body-b">
+		<div class="ui-header ui-bar-a">
+			<a href="#" data-role="button" class="add-preset-source" data-iconpos="notext" data-icon="plus" data-inline="true">Add Preset Source</a>
+		</div>
+		
+		<input type="radio" data-native="true" id="podcast-preset-all" name="podcast-preset-tabs" class="preset-tab-radio" checked="checked" data-role="none">
+		<label for="podcast-preset-all" class="preset-tab-selector ui-btn ui-btn-up-a">
+			All Podcasts
+		</label>
+		<div class="preset-tab-content visible-tab preset-sources-all">
+			<div class="list-view" data-count="50"></div>
+			<a href="#" data-role="button" data-theme="c" class="load-more">Load more..</a>
+		</div>
+		
+		<input type="radio" data-native="true" id="podcast-preset-suggested" name="podcast-preset-tabs" class="preset-tab-radio" data-role="none">
+		<label for="podcast-preset-suggested" class="preset-tab-selector ui-btn ui-btn-up-a">
+			Suggested Relevant Podcasts
+		</label>
+		<div class="preset-tab-content preset-sources-suggested">
+			<div class="list-view" data-count="50"></div>
+			<a href="#" data-role="button" data-theme="c" class="load-more">Load more..</a>
+		</div>
+	</div>
+	
+</div>
+
+<div data-role="footer">
+	<div class="panel-controls">
+		<a href="#" data-role="button" data-icon="plus" class="add-column">Add Column</a>
+		
+		<div data-role="controlgroup" data-type="horizontal">
+			<a href="#" data-role="button" data-icon="edit" data-iconpos="notext" data-inline="true" class="edit-column-title">Edit Title</a>
+			<a href="#" data-role="button" data-icon="delete" data-iconpos="notext" data-inline="true" class="remove-column">Delete Column</a>
+		</div>
+	</div>
+</div>

@@ -1,0 +1,15 @@
+{{each tweets}}
+	<li class="ui-li ui-btn-up-c">
+		<a class="tweet-avatar" href="http://twitter.com/{{if $value.screen_name}}${$value.screen_name}{{else}}${$value.from_user}{{/if}}" target="_blank">
+			<img src="${$value.profile_image_url}" height="48" width="48" alt="${$value.screen_name}" title="${$value.screen_name}" border="0">
+		</a>
+		<span class="tweet-text">
+			{{html $value.html}}
+		</span>
+		<span class="tweet-time">
+			<a href="http://twitter.com/${$value.screen_name}/status/${$value.id_str}" title="View tweet on Twitter" target="_blank">
+				${$value.created_at}
+			</a>
+		</span>
+	</li>
+{{/each}}

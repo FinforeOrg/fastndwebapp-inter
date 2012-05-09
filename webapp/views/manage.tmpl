@@ -1,0 +1,19 @@
+<div id="manage-page" data-role="dialog" class="ui-page">
+	<div data-role="header">
+		<h1>Finfore Management</h1>		
+	</div>
+	<div data-role="content" data-theme="b">
+		<div id="management-tabs">
+			<ul>
+				{{each modules}}					
+					{{if 'management' in $value}}
+						<li><a href="#management-tab-${$index}" rel="external" class="ui-btn ui-btn-up-a">${$index}</a></li>					
+					{{/if}}
+				{{/each}}
+			</ul>
+			{{each modules}}
+				<div id="management-tab-${$index}" data-category="${$index}" class="management-tab-panel"></div>
+			{{/each}}
+		</div>
+	</div>	
+</div>

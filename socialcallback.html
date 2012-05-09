@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<title>FastND</title>
+	<style>html { padding: 10px; margin: 0; background: #eeeeee; font-family: sans-serif; color: #333; text-align: center;	}</style>
+</head>
+<body>
+	<p>Redirecting to FastND..</p>
+	
+	<script type="text/javascript" src="webapp/config.js"></script>
+	<script type="text/javascript">
+		var $_GET = {};
+		document.location.search.replace(/\??(?:([^=]+)=([^&]*)&?)/g, function () {
+			function decode(s) {
+				return decodeURIComponent(s.split("+").join(" "));
+			};
+			
+			$_GET[decode(arguments[1])] = decode(arguments[2]);
+		});
+		
+		var updateProfile = $_GET['update_profile'],
+			authToken = $_GET['auth_token'],
+			authSecret = $_GET['auth_secret'],
+			userId = $_GET['user_id'];
+			userDataUrl = finforeBaseUrl + '/users/' + userId + '.json?auth_token=' + authToken + '&auth_secret=' + authSecret;
+		
+		var oXHR = new XMLHttpRequest();
+		oXHR.open('GET', userDataUrl, true);
+		oXHR.onreadystatechange = function (oEvent) {
+			if (oXHR.readyState === 4) {
+				if (oXHR.status === 200 && oXHR.responseText) {
+					localStorage.setItem('user', oXHR.responseText);
+					localStorage.setItem('updateProfile', updateProfile);
+				}
+				
+				// redirect to app
+				window.location = finforeAppUrl;
+			}
+		};
+		oXHR.send(null);
+	</script>
+</body>
+</html>

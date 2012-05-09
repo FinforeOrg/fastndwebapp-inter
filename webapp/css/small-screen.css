@@ -1,0 +1,377 @@
+/*
+ * Finfore.net 
+ * Small-screen CSS
+ *
+ */
+
+ /* Main */
+html, body {
+	margin: 0;
+	padding: 0;
+	font-family: sans-serif;	
+	
+	-webkit-text-size-adjust: 100%;
+	-ms-text-size-adjust: none;
+	text-size-adjust: 100%;
+}
+ 
+/* Hide panel controlgroups */ 
+.small-screen .postMessage textarea.ui-input-text {
+	height: 120px;
+}
+
+/* ===== SMALL SCREEN LAYOUT ===== */
+.small-screen .main-page {
+	overflow: auto;
+}
+.small-screen #header-buttons {
+	margin: 5px 0px 0px 10px;
+	float: none;
+	clear: both;
+	overflow: hidden;
+}
+.small-screen .panel .ui-header .ui-title {
+	margin: .6em 0 .8em 0;
+}
+a.panel-back-button {	
+	color: #fff;
+}
+.small-screen .panel {
+	width: 100%;
+}
+
+/* Small Screen Login */
+.small-screen #login-page [data-role=content] form {
+	width: auto;
+}
+#login-page label {
+	width: 20%;
+	padding-right: 10%;
+	display: inline-block !important;
+}
+#login-page input {
+	width: 60%;
+	display: inline-block;
+}
+#login-page [data-role=controlgroup] {
+	margin: 0 !important;
+	
+	white-space: nowrap;
+}
+#login-page [data-role=controlgroup] .ui-btn {
+	width: 50%;
+}
+#login-page .forgot-password {
+	padding: 15px 0;
+	
+	font-size: 12px;
+}
+.public-account-btn {
+	margin: 0 0 30px 0;
+}
+.social-signin p {
+	font-size: 12px;
+}
+
+/* Mobile Navbar */
+[data-role=page] [data-role=content] {
+	padding-bottom: 90px !important;
+}
+.mobile-navbar {
+	position: fixed;
+	bottom: 0;
+	left: 0;
+	z-index: 9999;
+	background-color: #333;
+	
+	display: block;
+	width: 100%;
+}
+.mobile-navbar .ui-btn .ui-btn-inner { 
+	padding-top: 40px !important; 
+}
+.mobile-navbar .ui-btn .ui-icon {
+	width: 32px!important;
+	height: 32px!important;
+	margin-left: -15px !important;
+	box-shadow: none!important;
+	-moz-box-shadow: none!important;
+	-webkit-box-shadow: none!important;
+	-webkit-border-radius: 0 !important;
+	border-radius: 0 !important;
+}
+.main-icon .ui-icon {
+	background: url(../images/icons/mainBigIcon.png) no-repeat;
+}
+.stocks-icon .ui-icon {
+	background: url(../images/icons/stocksBigIcon.png) no-repeat;
+}
+.companies-icon .ui-icon {
+	background: url(../images/icons/companiesBigIcon.png) no-repeat;
+}
+.alerts-icon .ui-icon {
+	background: url(../images/icons/alertsBigIcon.png) no-repeat;
+}
+.lookup-icon .ui-icon {
+	background: url(../images/icons/lookupBigIcon.png) no-repeat;
+}
+
+/* Small Screen Layout */
+.panel .ui-content {
+	padding: 0;
+	overflow: hidden;
+	
+	font-size: 12px;
+}
+.desktop-title {
+	overflow: hidden;
+	width: auto !important;
+	padding: 5px 10px;
+}
+.desktop-title h1 {
+	margin: 0 !important;
+}
+
+/* Small Screen Columns */
+.small-screen .ui-header {
+	border-bottom: 1px solid #555;
+	z-index: 3;
+}
+
+/* Header Buttons */
+.header-buttons {
+	float: right;
+	height: 44px;
+}
+.header-buttons a {
+	postion: relative;
+	top: 0;
+	overflow: visible;	
+	display: block;	
+	float: left;
+	width: 42px;
+	height: 42px;
+	margin-right: 8px;
+	
+	background-position: center center;
+	background-repeat: no-repeat;	
+	
+	text-indent: -9999px;
+	text-decoration: none;
+	opacity: 0.6;
+	cursor: pointer;
+}
+.header-buttons a:active {
+	opacity: 1;
+	margin-top: 2px;
+}
+.header-buttons a.profile-button {
+	background-image: url(../images/icons/userBigIcon.png);
+}
+.header-buttons a.help-button {
+	background-image: url(../images/icons/helpBigIcon.png);
+}
+.header-buttons a.logout-button {
+	background-image: url(../images/icons/logoutBigIcon.png);
+}
+.header-buttons a.add-tab-button {
+	background-image: url(../images/icons/lookupBigIcon.png);
+}
+
+/* Mobile Panel Sliders */
+.ui-header .panel-mobile-sliders {
+	top: 0;
+	margin: .3em 0 1em;
+}
+.panel-mobile-sliders a {
+	top: 0 !important;
+	padding: 3px;
+}
+
+/* Add New Company Dialog */
+.companies-list .ui-li-count {
+	display: none;
+}
+
+/* Collapsible Companies */
+.companies-page .ui-content {
+	padding: 0;
+}
+.companies-page .ui-collapsible, .collapsible-company h3 {
+	margin: 0;
+}
+.collapsible-company h3 a, .collapsible-company h3 a > span {
+	-webkit-border-radius: 0em;
+	-moz-border-radius: 0em;
+	border-radius: 0em;
+}
+.collapsible-company .ui-listview {
+	margin: 0 0 .5em 0;
+}
+.collapsible-company .ui-collapsible-content {
+	padding: 0;
+	margin: 0;
+}
+
+/* Update Page */
+#mobile-updates .ui-content .ui-btn {
+	height: auto;
+	text-align: left;
+	
+	white-space: normal;
+}
+#mobile-updates .ui-content .ui-btn .ui-btn-inner {
+	padding-left: 48px;
+	
+	white-space: normal;
+} 
+#mobile-updates .ui-content .ui-btn .ui-icon {
+	width: 32px;
+	height: 32px;
+	margin-top: -15px;
+	background-color: transparent;
+	
+	border-radius: 0;
+}
+#mobile-updates .ui-content .ui-btn a:before {
+	content: '';
+	display: block;
+	position: absolute;
+	left: 5px;
+	top: 5px;
+	width: 32px;
+	height: 32px;
+	background-position: center center;
+	background-repeat: no-repeat;
+}
+.ui-icon-twitter-update {
+	background-image: url(../images/icons/twitterUpdateIconMobile.png);
+}
+.ui-icon-prices-update {
+	background-image: url(../images/icons/pricesUpdateIconMobile.png);
+}
+.ui-icon-feed-update {
+	background-image: url(../images/icons/feedUpdateIconMobile.png);
+}
+
+/* Header Sign-in/up Button */
+.signin-button {
+	margin-top: 5px !important;
+}
+
+/* Public Account Selector */
+#public-account-selector .ui-content p {
+	margin: 0;
+	color: #888;
+	font-size: 12px;
+	font-weight: bold;
+}
+
+#public-account-selector .ui-field-contain {
+	padding: 5px 0;
+}
+
+#public-account-selector label {
+	font-size: 16px;
+	line-height: 0.8;
+}
+
+/* Column Selector Lists */
+
+/* Make columns titles not clickable, but make icons clickable */
+.split-selector li {
+	pointer-events: none;
+}
+
+.split-selector li > a {
+	pointer-events: all;
+	
+	width: 55px;
+}
+
+.split-selector .load-more-entries {
+	pointer-events: all;
+}
+
+.split-selector li > a .ui-btn-icon-notext {
+	right: 15px;
+}
+
+/* ===== MODULES ===== */
+
+/* Prices */
+@media screen and (orientation:landscape) {
+	.prices-table tr td {
+		width: 25% !important;
+	}
+}
+.prices-table tr td a {
+	color: #375DDB; /* same as .panel a in base.css */
+	text-decoration: underline;
+}
+
+/* Feed */
+.feed .ui-li-heading {
+	margin: .1em 0;
+	
+	font-size: 12px;
+}
+
+/* Portfolio Column Selectors */
+.trunc-title {
+	display: inline-block;
+	width: 120px;
+	white-space: nowrap;
+    overflow: hidden;
+	text-overflow: ellipsis;
+    -o-text-overflow: ellipsis;
+    -ms-text-overflow: ellipsis;
+}
+
+
+/* **** JQUERY MOBILE **** */
+.ui-dialog  {
+	margin-top: 0;
+}
+.ui-dialog .ui-header {
+	margin-top: 0;
+}
+/* Dialog titles */
+.ui-header .ui-title, .ui-footer .ui-title {
+	margin: .6em 30px .8em 30px;
+}
+
+/* Remove box-shadows and text-shadows for performance */
+.ui-shadow,
+.ui-btn-up-a,
+.ui-btn-hover-a,
+.ui-btn-down-a,
+.ui-body-b,
+.ui-btn-up-b,
+.ui-btn-hover-b,
+.ui-btn-down-b,
+.ui-bar-c,
+.ui-body-c,
+.ui-btn-up-c,
+.ui-btn-hover-c,
+.ui-btn-down-c,
+.ui-bar-c,
+.ui-body-d,
+.ui-btn-up-d,
+.ui-btn-hover-d,
+.ui-btn-down-d,
+.ui-bar-d,
+.ui-body-e,
+.ui-btn-up-e,
+.ui-btn-hover-e,
+.ui-btn-down-e,
+.ui-bar-e,
+.ui-overlay-shadow,
+.ui-shadow,
+.ui-btn-active,
+.ui-body-a,
+.ui-bar-a {
+ text-shadow: none;
+ box-shadow: none;
+ -webkit-box-shadow: none;
+}

@@ -1,0 +1,140 @@
+<div class="main-page {{if user && user.is_public}}public-user{{/if}}" data-role="page">
+	<div data-role="header" class="desktop-title">
+		<h1>FastND</h1>
+		{{if user && user.is_public}}
+			<a data-role="button" class="signin-button ui-btn-right" data-theme="a">Sign In</a> 
+		{{/if}}
+		
+		{{if user && !user.is_public}}
+			<div class="header-buttons">
+				{{if user && !user.is_public}}
+					<a ontouchstart="" class="add-tab-button">Lookup Company</a>
+				{{/if}}
+				<a ontouchstart="" class="logout-button">Logout</a>
+			</div>
+		{{/if}}
+	</div>
+	<div data-role="content"></div>
+</div>
+
+<div class="main-columns columns-container" data-backpage="main-page"></div>
+<div class="companies-columns columns-container" data-backpage="companies-page"></div>
+<div class="stocks-columns columns-container" data-backpage="stocks-page"></div>
+
+<div data-role="navbar" class="mobile-navbar">
+	<ul>
+		<li><a class="main-icon main-button ui-btn-active" data-icon="custom" data-theme="a">Main</a></li>
+		<li><a class="stocks-icon stocks-button" data-icon="custom" data-theme="a">Stocks</a></li>
+		<li><a class="companies-icon companies-button" data-icon="custom" data-theme="a">Companies</a></li>
+		
+		{{if user && !user.is_public}}
+			<li><a class="alerts-icon alerts-button" data-icon="custom" data-theme="a">Alerts</a></li>
+		{{else}}
+			<li><a class="lookup-icon lookup-button" data-icon="custom" data-theme="a">Lookup</a></li>
+		{{/if}}
+		
+	</ul>
+</div>
+
+<div class="companies-page ui-page" data-role="page">
+	<div data-role="header" class="desktop-title">
+		<h1>FastND</h1>
+		{{if user && user.is_public}}
+			<a data-role="button" class="signin-button ui-btn-right" data-theme="a">Sign In</a> 
+		{{/if}}
+		
+		{{if user && !user.is_public}}
+			<div class="header-buttons">
+				{{if user && !user.is_public}}
+					<a ontouchstart="" class="add-tab-button">Lookup Company</a>
+				{{/if}}
+				<a ontouchstart="" class="logout-button">Logout</a>
+			</div>
+		{{/if}}
+	</div>
+	<div data-role="content"></div>
+</div>
+
+<div class="stocks-page ui-page" data-role="page">
+	<div data-role="header" class="desktop-title">
+		<h1>FastND</h1>
+		{{if user && user.is_public}}
+			<a data-role="button" class="signin-button ui-btn-right" data-theme="a">Sign In</a> 
+		{{/if}}
+		
+		{{if user && !user.is_public}}
+			<div class="header-buttons">
+				{{if user && !user.is_public}}
+					<a ontouchstart="" class="add-tab-button">Lookup Company</a>
+				{{/if}}
+				<a ontouchstart="" class="logout-button">Logout</a>
+			</div>
+		{{/if}}
+	</div>
+	<div data-role="content"></div>
+</div>
+
+{{if user && !user.is_public}}
+	<div id="mobile-updates" data-role="page">
+		<div data-role="header" class="desktop-title">
+			<h1>FastND</h1>
+			{{if user && user.is_public}}
+				<a data-role="button" class="signin-button ui-btn-right" data-theme="a">Sign In</a> 
+			{{/if}}
+			
+			{{if user && !user.is_public}}
+				<div class="header-buttons">
+					{{if user && !user.is_public}}
+						<a ontouchstart="" class="add-tab-button">Lookup Company</a>
+					{{/if}}
+					<a ontouchstart="" class="logout-button">Logout</a>
+				</div>
+			{{/if}}
+		</div>
+		<div data-role="content">
+			<div class="mobile-update-list"></div>
+		</div>
+	</div>
+{{/if}}
+
+{{if !user || user.is_public}}
+<div id="public-account-selector" data-role="dialog" data-theme="a" data-content-theme="c">
+	<div data-role="header">
+		<h1>Public Accounts</h1>
+	</div>
+	
+	<div data-role="content">
+		<p>Try out some of our public accounts by selecting your areas of focus</p>
+		<form>
+			<div data-role="fieldcontain">
+				<label for="profession">${focus.professional.title}</label>
+				<select name="user[profession]" id="profession">
+					{{each focus.professional.profiles}}
+						${currentFocusId = $value._id}
+						<option value="${$value._id}" {{each selectedFocus.professional}} {{if $value._id === currentFocusId}} selected="selected" {{/if}} {{/each}}>${$value.title}</option>
+					{{/each}}
+				</select>
+			</div>
+			<div data-role="fieldcontain">
+				<label for="industry">${focus.industrial.title}</label>
+				<select name="user[industry]" id="industry">
+					{{each focus.industrial.profiles}}
+						${currentFocusId = $value._id}
+						<option value="${$value._id}" {{each selectedFocus.industrial}} {{if $value._id === currentFocusId}} selected="selected" {{/if}} {{/each}}>${$value.title}</option>
+					{{/each}}
+				</select>
+			</div>
+			<div data-role="fieldcontain">
+				<label for="geographic">${focus.geographic.title}</label>
+				<select name="user[geographic]" id="geographic">
+					{{each focus.geographic.profiles}}
+						${currentFocusId = $value._id}
+						<option value="${$value._id}" {{each selectedFocus.geographic}} {{if $value._id === currentFocusId}} selected="selected" {{/if}} {{/each}}>${$value.title}</option>
+					{{/each}}
+				</select>
+			</div>
+		</form>
+		<button data-theme="b" data-icon="arrow-r" data-iconpos="right" class="public-account-selector-btn">Try account</button>
+	</div>	
+</div>
+{{/if}}

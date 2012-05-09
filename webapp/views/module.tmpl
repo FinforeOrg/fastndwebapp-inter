@@ -1,0 +1,15 @@
+<div data-role="header">	
+	{{if smallScreen}}
+		<a data-role="button" data-icon="arrow-l" data-inline="true" class="ui-btn-left panel-back-button">Back</a>
+	{{/if}}
+	<h1>${title}</h1>
+	{{if smallScreen}}
+		<div data-role="controlgroup" data-type="horizontal" class="ui-btn-right panel-mobile-sliders">
+			<a data-role="button" data-icon="arrow-l" data-iconpos="notext" data-theme="a" data-inline="true" class="panel-previous">Previous Column</a>
+			<a data-role="button" data-icon="arrow-r" data-iconpos="notext" data-theme="a" data-inline="true" class="panel-next">Next Column</a>
+		</div>
+	{{/if}}
+</div>
+<div data-role="content">
+	{{html content}}
+</div>

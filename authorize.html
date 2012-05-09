@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<title>FastND</title>
+	<style>html { padding: 10px; margin: 0; background: #eeeeee; font-family: sans-serif; color: #333; text-align: center;	}</style>
+</head>
+<body>
+	<p>Redirecting to FastND..</p>
+	
+	<script type="text/javascript">
+		var $_GET = {};
+		document.location.search.replace(/\??(?:([^=]+)=([^&]*)&?)/g, function () {
+			function decode(s) {
+				return decodeURIComponent(s.split("+").join(" "));
+			};
+			
+			$_GET[decode(arguments[1])] = decode(arguments[2]);
+		});
+		
+		var feedAccountId = $_GET['feed_account_id'];
+		window.opener.postMessage(feedAccountId, '*');
+		window.close();
+	</script>
+</body>
+</html>
