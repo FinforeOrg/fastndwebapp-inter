@@ -143,7 +143,10 @@ finfore.login = function() {
 				 */
 				window.plugins.childBrowser.onLocationChange = function (url) {
 					if(url.indexOf(finforeAppUrl + 'socialcallback.html') == 0) {
-						window.location.href = url;
+						var localSocialCallback = url.replace(finforeAppUrl, finforeNativeUrl);
+						// open local socialcallback.html with params in main webview
+						window.location.href = localSocialCallback;
+						
 						window.plugins.childBrowser.close();
 					}
 				};

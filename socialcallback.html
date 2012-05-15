@@ -29,12 +29,18 @@
 		oXHR.onreadystatechange = function (oEvent) {
 			if (oXHR.readyState === 4) {
 				if (oXHR.status === 200 && oXHR.responseText) {
+					
 					localStorage.setItem('user', oXHR.responseText);
 					localStorage.setItem('updateProfile', updateProfile);
+					
 				}
 				
-				// redirect to app
-				window.location = finforeAppUrl;
+				// redirect to app - url different from web app
+				if(finforeNative) {
+					window.location = finforeNativeUrl + 'index.html';
+				} else {
+					window.location = finforeAppUrl;
+				}
 			}
 		};
 		oXHR.send(null);
