@@ -140,6 +140,11 @@ finfore.modules.feed = function() {
 			callbackId: options.callbackId,
 			sources: sources,
 			limit: options.limit,
+			
+			bingsearch: options.bingsearch,
+			blogsearch: options.blogsearch,
+			company: options.company,
+			
 			complete: function(entries) {
 				
 				// if loading more entries, slice the array to only show the latest 10
@@ -266,6 +271,7 @@ finfore.modules.feed = function() {
 				limit: feedNumber,
 				blogsearch: options.blogsearch,
 				bingsearch: options.bingsearch,
+				company: options.company,
 				callbackId: callbackId
 			});
 			

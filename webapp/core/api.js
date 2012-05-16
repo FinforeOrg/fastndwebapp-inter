@@ -265,20 +265,21 @@ feedReader.get = function(params) {
 		delete window[callbackName]; // cleanup
 	};
 	
-	$.ajax({
-		url: yqlUrl,
-		dataType: 'jsonp',
-		jsonpCallback: callbackName,
-		cache: true,
-		data: {
-			q: q,
-			format: 'json',
-			_maxage: 300,
-			diagnostics: false
-		}
-	});
+	// Manual jsonp call, to try and fix mobile issues
+	var requestUrl = yqlUrl + '?q=' + $.URLEncode(q) + '&format=json&diagnostics=false&_maxage=300&callback=' + callbackName;
+
+	// Fixes for RETARDED server-side redirection of mobile user-agents, that block certain RSS on mobile
+	if(finfore.smallScreen || finfore.tablet) {
+		requestUrl = finforeAppUrl + 'mobileProxy.php?url=' + $.URLEncode(requestUrl) + '&mode=native';
+	};
 	
+	// manual jsonp call
+	var script = document.createElement('script');
+	script.type = 'text/javascript';
+	script.src = requestUrl;
+	document.body.appendChild(script);
 };
+
 // required to keep the request url the same every time, cache
 function feedReaderCallback(response, params) {
 	var entries = [],
