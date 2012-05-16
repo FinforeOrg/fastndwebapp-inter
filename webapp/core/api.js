@@ -269,7 +269,7 @@ feedReader.get = function(params) {
 	var requestUrl = yqlUrl + '?q=' + $.URLEncode(q) + '&format=json&diagnostics=false&_maxage=300&callback=' + callbackName;
 
 	// Fixes for RETARDED server-side redirection of mobile user-agents, that block certain RSS on mobile
-	if(finfore.smallScreen || finfore.tablet) {
+	if( (finfore.smallScreen || finfore.tablet) && !params.podcast ) {
 		requestUrl = finforeAppUrl + 'mobileProxy.php?url=' + $.URLEncode(requestUrl) + '&mode=native';
 	};
 	

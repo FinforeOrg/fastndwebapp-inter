@@ -138,6 +138,7 @@ finfore.modules.podcast = function() {
 			callbackId: options.callbackId,
 			sources: options.sources,
 			limit: options.limit,
+			podcast: true,
 			complete: function(entries) {
 		
 				// if loading more entries, slice the array to only show the latest 5
@@ -196,11 +197,13 @@ finfore.modules.podcast = function() {
 					$content.listview();
 				}
 				
-				var $media = $('video, audio', $markup);
-				$media.mediaelementplayer({
-					audioWidth: 275,
-					pluginPath: 'webapp/lib/mediaelement/'
-				});	
+				if(!finfore.smallScreen && !finfore.tablet && !finforeNative) {
+					var $media = $('video, audio', $markup);
+					$media.mediaelementplayer({
+						audioWidth: 275,
+						pluginPath: 'webapp/lib/mediaelement/'
+					});	
+				};
 				
 				options.$container.removeClass('panel-loading');
 				

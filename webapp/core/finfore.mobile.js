@@ -50,11 +50,11 @@ steal('jquery/view/tmpl')
 	Loader.show();
 })
 // Libs
-.then('//webapp/lib/flash_detect_min.js', '//webapp/lib/mediaelement/mediaelement-and-player.js', '//webapp/lib/toast/jquery.toastmessage.js', '//webapp/lib/jquery.mobile.js', '//webapp/lib/jquery-impromptu.3.1.js')
+.then('//webapp/lib/flash_detect_min.js', '//webapp/lib/toast/jquery.toastmessage.js', '//webapp/lib/jquery.mobile.js', '//webapp/lib/jquery-impromptu.3.1.js')
 // Load Core Templates
 .then('//webapp/views/desktop.mobile.tmpl', '//webapp/views/login.tmpl', '//webapp/views/signup.tmpl', '//webapp/views/addcompany.tmpl')
 // Load Core CSS
-.then('../lib/jquery.mobile.css', '../lib/mediaelement/mediaelementplayer.css', '../lib/toast/jquery.toastmessage.css')
+.then('../lib/jquery.mobile.css', '../lib/toast/jquery.toastmessage.css')
 .then('../css/shared.css').then('../css/small-screen.css')
 // Load Core Components
 .then('./core.js')
