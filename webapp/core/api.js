@@ -269,8 +269,9 @@ feedReader.get = function(params) {
 	var requestUrl = yqlUrl + '?q=' + $.URLEncode(q) + '&format=json&diagnostics=false&_maxage=300&callback=' + callbackName;
 
 	// Fixes for RETARDED server-side redirection of mobile user-agents, that block certain RSS on mobile
+	// make request through php proxy with desktop firefox user agent
 	if( (finfore.smallScreen || finfore.tablet) && !params.podcast ) {
-		requestUrl = finforeAppUrl + 'mobileProxy.php?url=' + $.URLEncode(requestUrl) + '&mode=native';
+		requestUrl = finforeAppUrl + 'mobileProxy.php?url=' + $.URLEncode(requestUrl) + '&mode=native&user_agent=' + $.URLEncode('Mozilla/5.0 (Windows NT 6.1; rv:12.0) Gecko/20100101 Firefox/12.0');
 	};
 	
 	// manual jsonp call

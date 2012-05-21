@@ -35,7 +35,7 @@ var finfore = function() {
 		user = JSON.parse(user);
 		
 		// failsafe
-		if(user.error) user = false;
+		if(user.error || !user._id) user = false;
 	}
 	
 	// Update profile

@@ -135,6 +135,9 @@
 // 
 // ############################################################################
 
+// Turn off all error reporting
+error_reporting(0);
+
 // Change these configuration options if needed, see above descriptions for info.
 $enable_jsonp    = false;
 $enable_native   = true;
