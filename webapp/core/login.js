@@ -61,9 +61,13 @@ finfore.login = function() {
 			
 	};
 	
-	var init = function() {
+	var init = function(options) {
 		
-		if(!$('#login-page').length) {
+		if(!options) options = {};
+		
+		$loginContainer = $('#login-page');
+		
+		if(!$loginContainer.length) {
 		
 			var template = $.View('//webapp/views/login.tmpl', {
 				user: finfore.data.user,
@@ -77,19 +81,9 @@ finfore.login = function() {
 			if($.mobile.hidePageLoadingMsg) $.mobile.hidePageLoadingMsg();
 			
 			finfore.$body.append(template);
-			$loginContainer = $('#login-page');			
+			$loginContainer = $('#login-page');
 			
 			$('#signup-button', $loginContainer).click(finfore.signup.init);
-			
-			if(finfore.smallScreen) {				
-				$.mobile.changePage($loginContainer, {
-					changeHash: false
-				});
-			} else {
-				$.mobile.changePage($loginContainer, {
-					transition: 'slidedown'
-				});
-			};			
 			
 			$loginContainer.find('form').bind('submit', loadDesktop);
 			
@@ -119,7 +113,7 @@ finfore.login = function() {
 					});
 				});
 				
-				$('.public-account-btn').click(function() {
+				$('.public-account-btn', $loginContainer).click(function() {
 					$.mobile.changePage(nodes.$publicPage, {
 						transition: 'slide'
 					});
@@ -152,17 +146,31 @@ finfore.login = function() {
 				};
 			};
 			
-		} else {
+		}
 		
-			$loginContainer = $('#login-page');
-			$.mobile.changePage($loginContainer, {
-				transition: 'slidedown'
-			});
+		// changePage
+		if(!options.silentInit) {
 			
-		}		
+			if(finfore.smallScreen) {
+				
+				$.mobile.changePage($loginContainer, {
+					changeHash: false
+				});
+				
+			} else {
+				
+				$.mobile.changePage($loginContainer, {
+					transition: 'slidedown'
+				});
+				
+			};
+		
+		}
+		
 	};
 
 	return {
-		init: init
+		init: init,
+		nodes: nodes
 	}
 }();

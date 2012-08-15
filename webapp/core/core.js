@@ -11,6 +11,12 @@ if(smallScreen) {
 	var smallScreen = false;
 };
 
+// Detect Touch
+var touchSupport = !!('ontouchstart' in window);
+if(touchSupport) {
+	$('html').addClass('touch');
+}
+
 var finfore = function() {
 	var url = {
 		// login
@@ -49,7 +55,7 @@ var finfore = function() {
 	var largeScreen = (document.documentElement.clientWidth > 1024);
 	
 	// determine if blank state will be displayed
-	var blankState = (Storage.getItem('blankState')) ? false : true;	
+	var blankState = (Storage.getItem('blankState')) ? false : true;
 	
 	/* Data Store */
 	var data = {
@@ -328,9 +334,9 @@ var finfore = function() {
 	// Array sort in acending Order, comparing the position attr in objects
 	// Used to sort columns and companies
 	var sortPosition = function(obj1, obj2) {	  
-	  if (obj1.position > obj2.position) return 1;
-	  if (obj1.position < obj2.position) return -1;
-	  return 0;
+		if (obj1.position > obj2.position) return 1;
+		if (obj1.position < obj2.position) return -1;
+		return 0;
 	};
 		
 	/* Populate Default tabs and create Company tabs */
@@ -575,9 +581,10 @@ var finfore = function() {
 	var companies = {
 		// Add Company
 		add: function(companiesList, switchTab) {
+
 			// update data
 			finfore.data.companies = finfore.data.companies.concat(companiesList);			
-			
+
 			// create companies
 			$.each(companiesList, function() {
 				
@@ -710,14 +717,11 @@ var finfore = function() {
 					// wait for the panels to be created
 					setTimeout(function() {
 						
-						if(finfore.tablet) {
-							// Tablet binds the desktop.tabs.select event
-							// to the expand event.
-							// So we can just trigger expand.
-							$tab.trigger('expand');
-						} else {
-							finfore.desktop.tabs.select($tab);
-						};
+						// Tablet binds the desktop.tabs.select event
+						// to the expand event.
+						// So we can just trigger expand.
+						
+						$tab.trigger('expand');
 						
 					}, 100);
 					
@@ -727,9 +731,9 @@ var finfore = function() {
 		},
 		// Remove Company
 		remove: function() {
-			var $tab = $(this).parent('li');
-			var companyId = $('a', $tab).attr('href').substr(1);
-			var companyName = $('a', $tab).text();
+			var $tab = $(this).parents('div:first');
+			var companyId = $tab.attr('data-company-id');
+			var companyName = $(this).parents('h3:first').text();
 			
 			var form = '<h2>Are you sure you sure you want to remove <em>' + companyName + '</em>?</h2>';
 			$.prompt(form, {
@@ -842,7 +846,17 @@ var finfore = function() {
 				return false;
 			});
 			
+			// when resuming the app (from minimized in the background)
+			document.addEventListener('resume', function() {
+				var $loadedColumns = $('.panel.column-loaded');
+				
+				$loadedColumns.each(function() {
+					$(this).trigger('refresh');
+				});
+			}, false);
+			
 		};
+		
 		
 	};
 	
@@ -865,14 +879,12 @@ var finfore = function() {
 		//populate
 		populate: populate,
 		
-		tablet: false,
 		smallScreen: smallScreen,
 		$body: $('body'),
 		
 		publicLogin: publicLogin
 	}
 }();
-
 
 /* Mods for jQuery Mobile
  * Overrides jQ Mobile's Navigation model, disabling it.

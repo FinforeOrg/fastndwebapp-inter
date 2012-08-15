@@ -10,19 +10,23 @@ finfore.addcompany = function() {
 		allCompanies;
 	
 	var saveCompany = function() {
+
 		var companyIndex = parseInt($(this).attr('data-index')),
-			companyId = allCompanies[companyIndex]._id,
+			companyId = finfore.addcompany.allCompanies[companyIndex]._id,
 			companyExists = false,
-			$callbackPage = (finfore.smallScreen) ? finfore.desktop.nodes.$companiesPage : finfore.desktop.nodes.$page,
+			$callbackPage = (finfore.smallScreen) ? finfore.desktop.nodes.$firstColumn : finfore.desktop.nodes.$page,
 			tabSelector;
 		
+
 		// check if company already exists
-		$.each(finfore.data.companies, function(i, n) {
-			if(n.feed_info_id == companyId) {
-				var $tab = $('#' + n._id, $callbackPage);
+		$.each(finfore.data.companies, function(i, n) {		
+			
+			if(n.feed_info_id == companyId ) {
+				var $tab = $('#' + n._id);
 				
 				tabSelector = $tab;
 				if(!finfore.smallScreen) tabSelector = $.data($tab[0], 'selector');
+				
 				finfore.desktop.tabs.select(tabSelector);
 				
 				companyExists = true;
@@ -31,20 +35,27 @@ finfore.addcompany = function() {
 			}
 		});
 		
-		// close add company dialog
-		$.mobile.changePage($callbackPage, {
-			transition: 'slidedown',
-			reverse: true
-		});
-		
+		// if not small-screen
+		if(!finfore.smallScreen) {
+			// close add company dialog
+
+			$.mobile.changePage($callbackPage, {
+				transition: 'slidedown',
+				reverse: true
+			});
+			
+		}
+	
 		// if company isn't added already
-		if(!companyExists) {
 		
+		if(!companyExists) {
+			
 			if(finfore.data.user.is_public) {
-				
+			
 				finfore.companies.add([{
-					feed_info: allCompanies[companyIndex],
-					_id: allCompanies[companyIndex]._id
+					feed_info: finfore.addcompany.allCompanies[companyIndex],
+					_id: finfore.addcompany.allCompanies[companyIndex]._id,
+					feed_info_id: finfore.addcompany.allCompanies[companyIndex]._id
 				}], true);
 			
 			} else {
@@ -62,12 +73,27 @@ finfore.addcompany = function() {
 						}
 					},
 					success: function(company) {
+
 						finfore.companies.add([company], true);
 						
 						Loader.hide();
 					}
 				});
 				
+			}
+			
+			if(finfore.smallScreen) {
+				
+				// show menu to see new available company and columns
+				finfore.$body.addClass('show-menu');
+				var $newCompany = finfore.desktop.nodes.$menuPage.find('[data-role="collapsible"]:last');
+				
+				if($newCompany.length) {
+					
+					finfore.$body.animate({
+						scrollTop: finfore.desktop.nodes.$menuPage.find('[data-role=collapsible]:last').offset().top
+					}, 2000);
+				}
 			}
 			
 		};
@@ -89,23 +115,21 @@ finfore.addcompany = function() {
 	};
 	
 	var init = function() {
+		
 		Loader.show();
+		
 		$page = $('#add-company-page');
 		
 		if(!$page.length) {
-			$.ajax({
-				url: finforeBaseUrl + '/feed_infos.json',
-				type: 'GET',			
-				data: {
-					category: 'all_companies'
-				},
+		
+			WebService.getCompanies({
 				success: function(companies) {
 					if(!$page.length) {
 						
 						// Sort companies alphabeticaly
 						companies.sort(abSorting);
 						
-						allCompanies = companies;
+						finfore.addcompany.allCompanies = companies;
 						
 						var template = $.View('//webapp/views/addcompany.tmpl', {
 							companies: companies
@@ -125,6 +149,7 @@ finfore.addcompany = function() {
 					Loader.hide();
 				}
 			});
+			
 		} else {
 			$.mobile.changePage($page, {
 				transition: 'slidedown'
@@ -136,6 +161,9 @@ finfore.addcompany = function() {
 	};
 
 	return {
-		init: init
+		init: init,
+		allCompanies: allCompanies,
+		abSorting: abSorting,
+		saveCompany: saveCompany
 	}
 }();

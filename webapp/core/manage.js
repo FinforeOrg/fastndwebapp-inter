@@ -20,12 +20,16 @@ finfore.manage = function() {
 		$.ajax({ 
 			url: finforeBaseUrl + '/feed_infos.json',
 			type: 'GET',
+			dataType: 'text',
 			data: {
 				category: options.category,
 				per_page: 50,
 				page: options.count
 			},
 			success: function(feed_infos) {
+				// manually loose convert from text to json, to bypass json errors with special chars
+				feed_infos = eval(feed_infos);
+				
 				finfore.data.feedInfos[options.category] = feed_infos;
 				
 				var template = $.View('//webapp/views/manage.feed-infos.tmpl', {

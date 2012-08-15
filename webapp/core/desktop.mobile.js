@@ -10,8 +10,33 @@ finfore.desktop = function() {
 		$page: [],
 		tabs: {
 			tabIndex: 0
-		}
-	};	
+		},
+		$firstColumn: []
+	};
+	
+	var switchedToFirstColumn = false;
+	
+	// private utility method for main and portfolio dividers
+	function capitaliseFirstLetter(string) {
+		return string.charAt(0).toUpperCase() + string.slice(1);
+	}
+	
+	// refresh loaded columns
+	var refreshLoadedColumns = function() {
+		var $loadedColumns = $('.column-loaded', finfore.$body),
+			$refreshIcon = $('.refresh-logo', $(this));
+		
+		// rotate logo
+		$refreshIcon.addClass('refresh-logo-rotate');
+		
+		// trigger refresh on loaded columns
+		$loadedColumns.trigger('refresh');
+		
+		// stop logo rotation in 2s
+		setTimeout(function() {
+			$refreshIcon.removeClass('refresh-logo-rotate');
+		}, 2000);
+	};
 	
 	var tabs = {};
 	/*
@@ -19,40 +44,26 @@ finfore.desktop = function() {
 	 */
 	tabs.add = function(options) {
 		var isCompany = (options.id !== 'main' && options.id !== 'portfolio'),
-			isPortfolio = (options.id == 'portfolio'),
 			$tab,
-			tabMarkup,
-			$tabCategory = nodes.$mainPageContent;
+			tabMarkup;
 		
 		if(isCompany) {
 			// companies
-			tabMarkup = '<div data-role="collapsible" data-collapsed="true" data-theme="a" id="' + options.id + '" class="collapsible-company"><h3>' + options.title + '</h3><ul data-role="listview" data-split-icon="arrow-r" data-split-theme="c" class="split-selector"></ul></div>';
-			
-			$tabCategory = nodes.$companiesPageContent;
+			tabMarkup = '<li class="company-item"><div data-role="collapsible" data-collapsed="true" data-theme="b" id="' + options.id + '" class="collapsible-company"><h3>' + options.title + '</h3><ul data-role="listview" data-split-icon="arrow-r" data-split-theme="a" class="split-selector"></ul></div></li>';
 		} else {
-			// stocks
-			tabMarkup = '<ul data-role="listview" id="' + options.id + '" data-split-icon="arrow-r" data-split-theme="c" class="split-selector"></ul>';
-			
-			if(isPortfolio) {
-				$tabCategory = nodes.$stocksPageContent;
-			};
+			// main/portfolio
+			tabMarkup = '<li data-role="list-divider" id="' + options.id + '">' + capitaliseFirstLetter(options.id) + '</li>';
 		};
 		
-		/* Append column selector
-		 * jQM required the nodes to be in the DOM when enhancing them
-		 */
 		$tab = $(tabMarkup);
-		$tab.appendTo($tabCategory);
+		
+		nodes.$mobileMenu.append($tab);
 		
 		// Enhance controls
-		if(isCompany) {
-			$tab.collapsible();
-			$('ul', $tab).listview();
-		} else {
-			$tab.listview();
-		}
+		nodes.$menuPage.trigger('create');
+		nodes.$mobileMenu.listview();
 		
-		return $tab;
+		return $(tabMarkup);
 	};
 	
 	tabs.select = function($tab, $panel) {
@@ -128,10 +139,24 @@ finfore.desktop = function() {
 		});
 		
 		// apend column selector
-		$tab.append($mobilePanelSelector);
 		
 		// refresh listview
-		$tab.listview('refresh');
+		if(data.options.company) {
+			$tab.append($mobilePanelSelector);
+			$tab.listview('refresh');
+		} else {
+			// append after last added column selector
+			// to maintain order from API
+			var $lastColumnSelector = $tab.nextUntil('li[data-role=list-divider]').not('.company-item').last();
+			
+			if($lastColumnSelector.length) {
+				$lastColumnSelector.after($mobilePanelSelector);
+			} else {
+				$tab.after($mobilePanelSelector);
+			}
+			
+			nodes.$mobileMenu.listview('refresh');
+		}
 		
 		/* Append Company panels in different containers for each category (main/stocks/companies).
 		 * We do this to be able to swipe between columns only from a certain category.
@@ -146,6 +171,13 @@ finfore.desktop = function() {
 		
 		$panel.appendTo($columnContainer);
 		finfore.modules[data.type].init($panel, data.options);
+		
+		// switch to first column
+		if(!switchedToFirstColumn) {
+			nodes.$firstColumn = $panel;
+			$.mobile.changePage($panel);
+			switchedToFirstColumn = true;
+		}
 	};
 	
 	/* 
@@ -228,7 +260,6 @@ finfore.desktop = function() {
 		var template = $.View('//webapp/views/desktop.mobile.tmpl', {
 				user: finfore.data.user,
 				focus: finfore.data.focus,
-				focus: finfore.data.focus,
 				blankState: finfore.data.blankState,
 				selectedFocus: finfore.data.selectedFocus
 			});
@@ -237,36 +268,142 @@ finfore.desktop = function() {
 		
 		// main nodes
 		$.extend(nodes, {
-			$navBar: $('.mobile-navbar'),
-			
-			$mainPage: $('.main-page'),
-			$stocksPage: $('.stocks-page'),
-			$companiesPage: $('.companies-page'),
+			$menuPage: $('.menu-page'),
 			
 			$mainColumns: $('.main-columns'),
 			$companiesColumns: $('.companies-columns'),
-			$stocksColumns: $('.stocks-columns')
+			$stocksColumns: $('.stocks-columns'),
+			
+			$mobileAddCompany: $('.mobile-addcompany')
 		});
 		
 		// get sub-nodes, to be able to use contexts
 		$.extend(nodes, {
-			$mainBtn: $('.main-button', nodes.$navBar),
-			$stocksBtn: $('.stocks-button', nodes.$navBar),
-			$companiesBtn: $('.companies-button', nodes.$navBar),
-			$alertsBtn: $('.alerts-button', nodes.$navBar),
-			
-			$stocksPageContent: $('[data-role=content]', nodes.$stocksPage),
-			$mainPageContent: $('[data-role=content]', nodes.$mainPage),
-			$companiesPageContent: $('[data-role=content]', nodes.$companiesPage)
+			$alertsBtn: $('.alerts-button', nodes.$menuPage),
+			$profileBtn: $('.profile-button', nodes.$menuPage),
+			$mobileMenu: $('.mobile-menu', nodes.$menuPage)
 		});
 		
-		finfore.$body.trigger('create');
+		// get and render companies
+		WebService.getCompanies({
+			success: function(companies) {
+				
+				// Sort companies alphabeticaly
+				companies.sort(finfore.addcompany.abSorting);
+				
+				finfore.addcompany.allCompanies = companies;
+				
+				var template = $.View('//webapp/views/addcompanymobile.tmpl', {
+					companies: companies
+				});
+
+				nodes.$mobileAddCompany.html(template);
+				
+				$('li', nodes.$mobileAddCompany).on('click', finfore.addcompany.saveCompany);
+				
+				nodes.$mobileAddCompany.listview('refresh');
+				
+				var $filterInput = $('input', nodes.$mobileAddCompany.siblings('form'));
+				
+				// unbind jquery mobile fitlers
+				$filterInput.unbind('keyup change');
+				
+				var list = nodes.$mobileAddCompany,
+					listview = list.data( "listview" ),
+					filterThread;
+				
+				// rewrite jquery mobile filters
+				$filterInput.bind('keyup change', function() {
+					
+					var val = this.value.toLowerCase(),
+						listItems = null,
+						lastval = $filterInput.jqmData( "lastval" ) + "",
+						childItems = false,
+						itemtext = "",
+						item;
+					
+					/* In case there was a previously set filter, stop it.
+					 * This makes only the latest version of the val to count,
+					 * and prevents performance issues when typing multiple letters
+					 * at an interval smaller than 1s.
+					 */
+					if(filterThread) clearTimeout(filterThread);
+					
+					// delay filter execution by 1s, from the last keyup, to not block the ui
+					filterThread = setTimeout(function() {
+							
+						// Change val as lastval for next execution
+						$filterInput.jqmData( "lastval" , val );
+						if ( val.length < lastval.length || val.indexOf(lastval) !== 0 ) {
+
+							// Removed chars or pasted something totally different, check all items
+							listItems = list.children();
+						} else {
+
+							// Only chars added, not removed, only use visible subset
+							listItems = list.children( ":not(.ui-screen-hidden)" );
+						}
+
+						if ( val.length > 2 ) {
+						
+							list.removeClass( "hide-mobile-companies");
+
+							// This handles hiding regular rows without the text we search for
+							// and any list dividers without regular rows shown under it
+
+							for ( var i = listItems.length - 1; i >= 0; i-- ) {
+								item = $( listItems[ i ] );
+								itemtext = item.jqmData( "filtertext" ) || item.text();
+
+								if ( listview.options.filterCallback( itemtext, val ) ) {
+
+									//mark to be hidden
+									item.toggleClass( "ui-filter-hidequeue" , true );
+								} else {
+
+									// There's a shown item in the bucket
+									childItems = true;
+								}
+							}
+
+							// Show items, not marked to be hidden
+							listItems
+								.filter( ":not(.ui-filter-hidequeue)" )
+								.toggleClass( "ui-screen-hidden", false );
+
+							// Hide items, marked to be hidden
+							listItems
+								.filter( ".ui-filter-hidequeue" )
+								.toggleClass( "ui-screen-hidden", true )
+								.toggleClass( "ui-filter-hidequeue", false );
+
+						} else {
+
+							//filtervalue is empty, hide list
+							list.addClass( "hide-mobile-companies");
+							
+							//filtervalue is empty => show all
+							listItems.toggleClass( "ui-screen-hidden", false );
+						}
+					
+					}, 1000);
+					
+				});
+				
+				// trigger keyup, in case text was entered before the items were loaded
+				$filterInput.trigger('keyup');
+				
+			}
+		});
 		
-		$.mobile.changePage(nodes.$mainPage);
+		// init menu
+		nodes.$menuPage.page();
+		
+		// reder markup
+		finfore.$body.trigger('create');
 		
 		// If the user is logged-in
 		if(finfore.data.user) {
-			//nodes.$tabBar = $('#mobile-tabs');
 				
 			// Add Main tab
 			var $mainTabBtn = tabs.add({
@@ -288,19 +425,6 @@ finfore.desktop = function() {
 			nodes.tabs.$main.add(nodes.tabs.$portfolio);
 			
 			finfore.populate();
-			
-			/* Back and Home buttons */
-			$(document).delegate('.panel-back-button', 'click', function() {
-				var $container = $(this).closest('.columns-container'),
-					$backPage = $( '.' + $container.attr('data-backpage') );
-				
-				$.mobile.changePage($backPage, {
-					reverse: true,
-					transition: 'slide'
-				});
-				
-				return false;
-			});
 			
 			// Panel Next/Previous events
 			$(document).delegate('.panel', 'swipeleft', function() {
@@ -338,12 +462,6 @@ finfore.desktop = function() {
 				// Sign-in button
 				$('.signin-button').click(finfore.login.init);
 				
-				// Company Lookup in navbar
-				$('.lookup-button').click(function() {
-					finfore.addcompany.init();
-					return false;
-				});
-				
 			} else {
 				// Updates Page
 				ticker.$page = $('#mobile-updates');
@@ -358,47 +476,54 @@ finfore.desktop = function() {
 					return false;
 				});
 				
-				// header add-company
-				finfore.$body.delegate('.add-tab-button', 'click', finfore.addcompany.init);
 			};
-			
-			nodes.$mainBtn.bind('click', function() {
-				$.mobile.changePage(nodes.$mainPage);
-			});
-			
-			nodes.$stocksBtn.bind('click', function() {
-				$.mobile.changePage(nodes.$stocksPage);
-			});
-			
-			nodes.$companiesBtn.bind('click', function() {
-				$.mobile.changePage(nodes.$companiesPage);
-			});
-			
-			// when the companies page is shown, activate the navbar button
-			// used when adding companies
-			nodes.$companiesPage.bind('pageshow', function() {
-				$('.ui-btn-active', nodes.$navBar).removeClass('ui-btn-active');
-				nodes.$companiesBtn.addClass('ui-btn-active');
-			});
-			
+
 			nodes.$alertsBtn.bind('click', function() {
 				$.mobile.changePage(ticker.$page);
 			});
 			
-			/* navbar hide/show
-			 * Hide the navbar when opening dialogs
-			 * and show it when opening pages.
-			 */
-			finfore.$body.delegate('[data-role=page]', 'pageshow', function(event, ui) {
-				if( nodes.$navBar.is(':hidden') ) {
-					nodes.$navBar.show();
-				};
+			nodes.$profileBtn.bind('click', function() {
+				finfore.profile.init();
+				return false;
 			});
 			
-			finfore.$body.delegate('[data-role=dialog]', 'pageshow', function(event, ui) {
-				if( nodes.$navBar.is(':visible') ) {
-					nodes.$navBar.hide();
-				};
+			// press the menu button
+			finfore.$body.delegate('.mobile-menu-button', 'click', function(event, ui) {
+				finfore.$body.toggleClass('show-menu');
+			});
+			
+			// when changeing page
+			finfore.$body.delegate('[data-role]', 'pagebeforeshow', function(event, ui) {
+				// remove show-menu class
+				finfore.$body.removeClass('show-menu');
+			});
+			
+			/* Hide menu when pressing any .mobile-column-select button from menu-page.
+			 * We need this because pageshow/pagebeforeshow doesn't trigger if a page is already visible/changedTo.
+			 */
+			nodes.$menuPage.delegate('.mobile-column-select', 'click', function(event, ui) {
+				finfore.$body.removeClass('show-menu');
+			});
+			
+			/* Hide menu when clicking on the visible content area */
+			finfore.$body.delegate('.mobile-content-overlay', 'click', function(event, ui) {
+				finfore.$body.removeClass('show-menu');
+			});
+			
+			// refresh columns button
+			$('.refresh-columns-button', nodes.$menuPage).bind('click', refreshLoadedColumns);
+		
+			$('.public-account-btn', nodes.$menuPage).click(function() {
+				// silent init login
+				finfore.login.init({
+					silentInit: true
+				});
+				
+				// mobe to public account selector page
+				$.mobile.changePage(finfore.login.nodes.$publicPage, {
+					transition: 'slide'
+				});
+				return false;
 			});
 		
 		};

@@ -206,6 +206,23 @@ var WebService = {
 		
 		
 		
+	},
+	
+	getCompanies: function(param) {
+	
+		if(!param) param = {};
+	
+		$.ajax({
+			url: finforeBaseUrl + '/feed_infos.json',
+			type: 'GET',
+			data: {
+				category: 'all_companies'
+			},
+			success: function(companies) {
+				if(param.success) param.success(companies);
+			}
+		});
+	
 	}
 	
 	/*
@@ -270,7 +287,7 @@ feedReader.get = function(params) {
 
 	// Fixes for RETARDED server-side redirection of mobile user-agents, that block certain RSS on mobile
 	// make request through php proxy with desktop firefox user agent
-	if( (finfore.smallScreen || finfore.tablet) && !params.podcast ) {
+	if( (finfore.smallScreen || touchSupport) && !params.podcast ) {
 		requestUrl = finforeAppUrl + 'mobileProxy.php?url=' + $.URLEncode(requestUrl) + '&mode=native&user_agent=' + $.URLEncode('Mozilla/5.0 (Windows NT 6.1; rv:12.0) Gecko/20100101 Firefox/12.0');
 	};
 	
