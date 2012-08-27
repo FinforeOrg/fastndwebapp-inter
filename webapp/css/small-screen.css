@@ -5,14 +5,17 @@
  */
 
  /* Main */
-html, body {
+html,
+body {
 	margin: 0;
 	padding: 0;
-	font-family: sans-serif;	
+	background: #eee;
 	
 	-webkit-text-size-adjust: 100%;
 	-ms-text-size-adjust: none;
 	text-size-adjust: 100%;
+	
+	font-family: sans-serif;	
 }
  
 /* Hide panel controlgroups */ 
@@ -73,49 +76,6 @@ a.panel-back-button {
 	font-size: 12px;
 }
 
-/* Mobile Navbar */
-[data-role=page] [data-role=content] {
-	padding-bottom: 90px !important;
-}
-.mobile-navbar {
-	position: fixed;
-	bottom: 0;
-	left: 0;
-	z-index: 9999;
-	background-color: #333;
-	
-	display: block;
-	width: 100%;
-}
-.mobile-navbar .ui-btn .ui-btn-inner { 
-	padding-top: 40px !important; 
-}
-.mobile-navbar .ui-btn .ui-icon {
-	width: 32px!important;
-	height: 32px!important;
-	margin-left: -15px !important;
-	box-shadow: none!important;
-	-moz-box-shadow: none!important;
-	-webkit-box-shadow: none!important;
-	-webkit-border-radius: 0 !important;
-	border-radius: 0 !important;
-}
-.main-icon .ui-icon {
-	background: url(../images/icons/mainBigIcon.png) no-repeat;
-}
-.stocks-icon .ui-icon {
-	background: url(../images/icons/stocksBigIcon.png) no-repeat;
-}
-.companies-icon .ui-icon {
-	background: url(../images/icons/companiesBigIcon.png) no-repeat;
-}
-.alerts-icon .ui-icon {
-	background: url(../images/icons/alertsBigIcon.png) no-repeat;
-}
-.lookup-icon .ui-icon {
-	background: url(../images/icons/lookupBigIcon.png) no-repeat;
-}
-
 /* Small Screen Layout */
 .panel .ui-content {
 	padding: 0;
@@ -124,23 +84,141 @@ a.panel-back-button {
 	font-size: 12px;
 }
 .desktop-title {
+	position: relative;
 	overflow: hidden;
 	width: auto !important;
-	padding: 5px 10px;
 }
 .desktop-title h1 {
-	margin: 0 !important;
+	float: none;
+	height: 25px;
+	margin: 8px 0 8px 50px !important;
+	background-size: auto 25px;
+	background-position: -25px;
 }
+
+.refresh-logo {
+	position: absolute;
+	top: 3px;
+	left: 15px;
+	width: 30px;
+	height: 30px;
+	background: url(../images/finforeLogo.png) no-repeat left center;
+	background-size: cover;
+}
+
+@-webkit-keyframes rotateLogo {
+	0% {
+		-webkit-transform: rotate(0);
+		-moz-transform: rotate(0);
+		-ms-transform: rotate(0);
+		-o-transform: rotate(0);
+		transform: rotate(0);
+	}
+	100% {
+		-webkit-transform: rotate(360deg);
+		-moz-transform: rotate(360deg);
+		-ms-transform: rotate(360deg);
+		-o-transform: rotate(360deg);
+		transform: rotate(360deg);
+	}
+}
+@-moz-keyframes rotateLogo {
+	0% {
+		-webkit-transform: rotate(0);
+		-moz-transform: rotate(0);
+		-ms-transform: rotate(0);
+		-o-transform: rotate(0);
+		transform: rotate(0);
+	}
+	100% {
+		-webkit-transform: rotate(360deg);
+		-moz-transform: rotate(360deg);
+		-ms-transform: rotate(360deg);
+		-o-transform: rotate(360deg);
+		transform: rotate(360deg);
+	}
+}
+@-o-keyframes rotateLogo {
+	0% {
+		-webkit-transform: rotate(0);
+		-moz-transform: rotate(0);
+		-ms-transform: rotate(0);
+		-o-transform: rotate(0);
+		transform: rotate(0);
+	}
+	100% {
+		-webkit-transform: rotate(360deg);
+		-moz-transform: rotate(360deg);
+		-ms-transform: rotate(360deg);
+		-o-transform: rotate(360deg);
+		transform: rotate(360deg);
+	}
+}
+@keyframes rotateLogo {
+	0% {
+		-webkit-transform: rotate(0);
+		-moz-transform: rotate(0);
+		-ms-transform: rotate(0);
+		-o-transform: rotate(0);
+		transform: rotate(0);
+	}
+	100% {
+		-webkit-transform: rotate(360deg);
+		-moz-transform: rotate(360deg);
+		-ms-transform: rotate(360deg);
+		-o-transform: rotate(360deg);
+		transform: rotate(360deg);
+	}
+}
+
+.refresh-logo-rotate {
+	-webkit-animation: rotateLogo 1s infinite linear;
+	-moz-animation: rotateLogo 1s infinite linear;
+	-o-animation: rotateLogo 1s infinite linear;
+	animation: rotateLogo 1s infinite linear;
+}
+
+.mobile-menu-button {
+	top: 3px !important;
+	padding: 3px;
+	
+	-webkit-border-radius: 0.2em !important;
+	-moz-border-radius: 0.2em !important;
+	-o-border-radius: 0.2em !important;
+	border-radius: 0.2em !important;
+}
+
+.ui-icon-menu {
+	background-image: url(../images/icons/menuIcon.png);
+	background-position: center center;
+}
+
+/* Loading Column */
+.panel-loading:after {
+	position: absolute;
+	left: 50%;
+	margin-left: -12px;
+	bottom: 10px;
+	display: block;
+	content: '';
+	width: 24px;
+	height: 24px;
+	background-image: url(../images/ajaxLoader.gif);
+	background-repeat: no-repeat;
+	background-position: center bottom 10px;
+}
+
 
 /* Small Screen Columns */
 .small-screen .ui-header {
-	border-bottom: 1px solid #555;
 	z-index: 3;
 }
 
 /* Header Buttons */
 .header-buttons {
-	float: right;
+	position: absolute;
+	top: 0;
+	right: 0;
 	height: 44px;
 }
 .header-buttons a {
@@ -183,6 +261,7 @@ a.panel-back-button {
 	top: 0;
 	margin: .3em 0 1em;
 }
+
 .panel-mobile-sliders a {
 	top: 0 !important;
 	padding: 3px;
@@ -194,6 +273,15 @@ a.panel-back-button {
 }
 
 /* Collapsible Companies */
+.company-item {
+	padding: 0 !important;
+	border: 0;
+}
+
+.company-item .ui-collapsible {
+	margin: 0;
+}
+
 .companies-page .ui-content {
 	padding: 0;
 }
@@ -254,11 +342,6 @@ a.panel-back-button {
 	background-image: url(../images/icons/feedUpdateIconMobile.png);
 }
 
-/* Header Sign-in/up Button */
-.signin-button {
-	margin-top: 5px !important;
-}
-
 /* Public Account Selector */
 #public-account-selector .ui-content p {
 	margin: 0;
@@ -283,9 +366,12 @@ a.panel-back-button {
 	pointer-events: none;
 }
 
+.split-selector .company-item,
 .split-selector li > a {
 	pointer-events: all;
+}
 	
+.split-selector li > a {
 	width: 55px;
 }
 
@@ -320,12 +406,101 @@ a.panel-back-button {
 /* Portfolio Column Selectors */
 .trunc-title {
 	display: inline-block;
-	width: 120px;
+	width: 100px;
 	white-space: nowrap;
     overflow: hidden;
 	text-overflow: ellipsis;
     -o-text-overflow: ellipsis;
     -ms-text-overflow: ellipsis;
+}
+
+/* Offcanvas Menu */
+.ui-mobile .menu-page {
+	position: relative;
+	top: 0;
+	left: -270px;
+	width: 270px;
+	display: block !important;
+	min-height: 100%;
+	
+	overflow: hidden;
+}
+
+.ui-mobile .menu-page:after {
+	content: '';
+	display: block;
+	width: 1px;
+	height: 100%;
+	position: absolute;
+	top: -10px;
+	right: -1px;
+	z-index: 10;
+	
+	-webkit-box-shadow: 0 -20px 10px 2px #111;
+	-moz-box-shadow: 0 -20px 10px 2px #111;
+	-ms-box-shadow: 0 -20px 10px 2px #111;
+	-o-box-shadow: 0 -20px 10px 2px #111;
+	box-shadow: 0 -20px 10px 2px #111;
+}
+
+.menu-page .ui-li-has-alt .ui-btn-inner a.ui-link-inherit {
+	padding-right: 80px;
+}
+
+div[data-role="page"],
+div[data-role="dialog"] {
+	-webkit-transition: all 0.3s ease-out; 
+	-moz-transition: all 0.3s ease-out; 
+	-o-transition: all 0.3s ease-out;
+	transition: all 0.3s ease-out;
+}
+
+.show-menu [data-role="page"] {
+	-webkit-transform: translateX(270px);
+	-moz-transform: translateX(270px);
+	-ms-transform: translateX(270px);
+	-o-transform: translateX(270px);
+	transform: translateX(270px);
+}
+
+/* Inline Companies search filter */
+.mobile-addcompany {
+	margin-bottom: 15px !important;
+	border-bottom: 5px solid #000;
+}
+
+.hide-mobile-companies {
+	display: none;
+}
+
+/* Content overlay, to hide menu on click */
+.mobile-content-overlay {
+	display: none;
+}
+
+.show-menu .mobile-content-overlay {
+	position: absolute;
+	top: 0;
+	left: 0;
+	display: block;
+	width: 100%;
+	height: 100%;
+	z-index: 10;
+}
+
+/* Faux column for columns to show full-height dark background behind menu, using pseudo-elements */
+.panel:before {
+	content: '.';
+	display: block;
+	height: 100%;
+	width: 270px;
+	position: absolute;
+	left: -270px;
+	top: 0;
+	z-index: 1;
+	background-color: #222;
+	
+	color: #222;
 }
 
 
@@ -337,7 +512,8 @@ a.panel-back-button {
 	margin-top: 0;
 }
 /* Dialog titles */
-.ui-header .ui-title, .ui-footer .ui-title {
+.ui-header .ui-title,
+.ui-footer .ui-title {
 	margin: .6em 30px .8em 30px;
 }
 

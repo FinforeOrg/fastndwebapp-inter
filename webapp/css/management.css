@@ -358,11 +358,20 @@
 	left: -1000px;
 	visibility: hidden;
 }
-.loading-content {
-	background-image: url(../images/ajaxLoader.gif);
-	background-repeat: no-repeat;
+.loading-content:after {
+	content: '';
+	position: absolute;
+	bottom: 0;
+	left: 50%;
+	z-index: 9999;
+	display: block;
+	width: 26px;
+	height: 26px;
+	margin-left: -13px;
 	
-	background-position: center center;
+	background: #fff url(../images/ajaxLoader.gif) no-repeat center center;
+	opacity: 0.7;
+	border-radius: 20px;
 }
 .loading-content .load-more {
 	display: none;
@@ -373,10 +382,10 @@
 	top: 60px;
 	
 	width: 96%;
-	height: 485px;
+	height: 380px;
 }
 .preset-tab-content .list-view {
-	max-height: 340px;
+	max-height: 390px;
 }
 .preset-tabs .preset-tab-selector {
 	position: relative;
@@ -400,7 +409,7 @@
 }
 .preset-tabs .preset-tab-radio:checked + label {
 	display: block;
-	height: 30px;
+	height: 15px;
 	background: #e1e1e1;
 	border-color: transparent;
 	

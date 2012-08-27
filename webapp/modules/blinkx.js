@@ -174,7 +174,7 @@ var blinkxCallback = function(result, params) {
 			// check date
 			pubDate = new Date(date * 1000);					
 			
-			if(finfore.smallScreen || finfore.tablet) {
+			if(finfore.smallScreen || touchSupport) {
 				url = url.replace('http://www.blinkx.com/burl?v=', 'http://m.blinkx.com/info/');
 			};
 			

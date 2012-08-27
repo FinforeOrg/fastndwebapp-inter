@@ -12,8 +12,9 @@
 	float: left;
 	margin: 9px 0px;
 	width: 150px;
-	height: 40px;
+	height: 35px;
 	background: url(../images/finforeLogo.png) no-repeat left center;
+	background-size: contain;
 	
 	text-indent: -9999px;
 }
@@ -278,22 +279,6 @@
 /* Panel Loader */
 .panel-loading li:last-of-type {
 	display: none;
-}
-.panel-loading:before {
-	position: absolute;
-	left: 50%;
-	margin-left: -12px;
-	bottom: 10px;
-	display: block;
-	content: '';
-	width: 24px;
-	height: 24px;
-	background-image: url(../images/ajaxLoader.gif);
-	background-repeat: no-repeat;
-	background-position: center bottom 10px;
-}
-.small-screen .panel-loading:before {
-	bottom: 90px !important;
 }
 
 /* Panels */

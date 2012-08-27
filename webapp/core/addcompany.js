@@ -27,7 +27,8 @@ finfore.addcompany = function() {
 				tabSelector = $tab;
 				if(!finfore.smallScreen) tabSelector = $.data($tab[0], 'selector');
 				
-				finfore.desktop.tabs.select(tabSelector);
+				// trigger expand - will also trigget tab.select
+				tabSelector.trigger('expand');
 				
 				companyExists = true;
 				
@@ -35,19 +36,21 @@ finfore.addcompany = function() {
 			}
 		});
 		
-		// if not small-screen
+		/*
+		// no longer needed as we odn't use the add-company dialog
+		if not small-screen
 		if(!finfore.smallScreen) {
+			
 			// close add company dialog
-
 			$.mobile.changePage($callbackPage, {
 				transition: 'slidedown',
 				reverse: true
 			});
 			
 		}
+		*/
 	
 		// if company isn't added already
-		
 		if(!companyExists) {
 			
 			if(finfore.data.user.is_public) {
@@ -114,6 +117,7 @@ finfore.addcompany = function() {
 		return 0;
 	};
 	
+	/*
 	var init = function() {
 		
 		Loader.show();
@@ -159,9 +163,10 @@ finfore.addcompany = function() {
 		};
 		
 	};
+	*/
 
 	return {
-		init: init,
+		//init: init,
 		allCompanies: allCompanies,
 		abSorting: abSorting,
 		saveCompany: saveCompany

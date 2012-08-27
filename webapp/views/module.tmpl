@@ -1,6 +1,6 @@
 <div data-role="header">	
 	{{if smallScreen}}
-		<a data-role="button" data-icon="arrow-l" data-inline="true" class="ui-btn-left panel-back-button">Back</a>
+		<a data-role="button" data-inline="true" data-icon="menu" data-theme="a" data-iconpos="notext" class="mobile-menu-button">Menu</a>
 	{{/if}}
 	<h1>${title}</h1>
 	{{if smallScreen}}
@@ -13,3 +13,6 @@
 <div data-role="content">
 	{{html content}}
 </div>
+{{if smallScreen}}
+	<div class="mobile-content-overlay"></div>
+{{/if}}

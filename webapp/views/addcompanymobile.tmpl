@@ -1,0 +1,9 @@
+{{each companies}}
+	<li data-index="${$index}">
+		<span class="ui-icon ui-icon-plus"></span>
+		${$value.title}
+		{{each $value.profiles}}
+			<span class="ui-li-count">${$value.title}</span>					
+		{{/each}}
+	</li>
+{{/each}}

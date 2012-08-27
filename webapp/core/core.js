@@ -708,11 +708,15 @@ var finfore = function() {
 				// switch to newly added company
 				// used by add-company
 				if(switchTab) {
+					$tab = $('.collapsible-company:last', finfore.desktop.nodes.$tabletTabs);
+					
+					/*
+					// no longer needed as we now always use the tablet menu
 					if(largeScreen) {
 						$tab = $('li:last', finfore.desktop.nodes.$tabList);
 					} else {
-						$tab = $('.collapsible-company:last', finfore.desktop.nodes.$tabletTabs);
 					}
+					*/
 					
 					// wait for the panels to be created
 					setTimeout(function() {

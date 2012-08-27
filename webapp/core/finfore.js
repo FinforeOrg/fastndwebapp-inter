@@ -49,7 +49,7 @@ steal('jquery/view/tmpl')
 // Libs
 .then('//webapp/lib/flash_detect_min.js', '//webapp/lib/jquery-ui/jquery-ui.min.js', '//webapp/lib/mediaelement/mediaelement-and-player.js','//webapp/lib/toast/jquery.toastmessage.js', '//webapp/lib/jquery-impromptu.3.1.js', '//webapp/lib/iscroll.js')
 // Load Core Templates
-.then('//webapp/views/desktop.tmpl', '//webapp/views/tab-view.tmpl', '//webapp/views/login.tmpl', '//webapp/views/addcompanymobile.tmpl', '//webapp/views/profile.tmpl', '//webapp/views/panel.controlgroup.tmpl', '//webapp/views/manage.tmpl', '//webapp/views/manage.feed-infos.tmpl', '//webapp/views/manage.panels.tmpl', '//webapp/views/manage.source.tmpl', '//webapp/views/signup.tmpl', '//webapp/views/addcompany.tmpl', '//webapp/views/help.tmpl')
+.then('//webapp/views/desktop.tmpl', '//webapp/views/tab-view.tmpl', '//webapp/views/login.tmpl', '//webapp/views/addcompanymobile.tmpl', '//webapp/views/profile.tmpl', '//webapp/views/panel.controlgroup.tmpl', '//webapp/views/manage.tmpl', '//webapp/views/manage.feed-infos.tmpl', '//webapp/views/manage.panels.tmpl', '//webapp/views/manage.source.tmpl', '//webapp/views/signup.tmpl', '//webapp/views/help.tmpl')
 // Load Core CSS
 .then('../lib/mediaelement/mediaelementplayer.css', '../lib/toast/jquery.toastmessage.css')
 .then('../css/shared.css').then('../css/base.css').then('../css/management.css')

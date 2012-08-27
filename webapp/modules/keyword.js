@@ -54,8 +54,8 @@ finfore.modules.keyword = function() {
 				data = $.data($input[0], 'data'),
 				feed_account = data.feed_account,
 				text = $('.keyword-text', $details).val(),
-				followers = $('.keyword-followers', $details).val(),
 				isAggregate = false;
+				//followers = $('.keyword-followers', $details).val(),
 			
 			if($('.keyword-aggregate', $details).is(':checked')) isAggregate = true;			
 
@@ -63,7 +63,7 @@ finfore.modules.keyword = function() {
 				_id: feed_account._id,
 				keyword_column_attributes: {
 					is_aggregate: isAggregate,
-					follower: followers,
+					//follower: followers,
 					keyword: text,
 					_id: feed_account.keyword_column._id
 				}

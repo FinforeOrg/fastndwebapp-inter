@@ -1,0 +1,937 @@
+/*
+ * Finfore.net 
+ * Base CSS
+ *
+ */
+
+/* Main */
+html, body {
+	height: 100%;
+	width: 100%;
+	margin: 0;
+	padding: 0;
+	font-family: sans-serif;
+	font-size: 12px;
+	
+	-webkit-font-smoothing: antialiased !important;
+}
+
+/* Desktop Layout */
+
+#desktop {
+	position: fixed !important;
+	width: 100%;
+	height: 100%;
+	overflow: hidden;
+	
+	z-index: 0 !important;
+}
+
+.desktop-inner .main-actions,
+.desktop-inner .tab-list,
+#desktop-content {
+	display: block;
+	height: 100%;
+	padding-bottom: 50px;
+	
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+}
+	
+.main-actions {
+	width: 100%;
+	height: 80px;
+}
+
+.tab-list {
+	float: left;
+	height: 100%;
+	width: 150px;
+}
+
+#desktop-content {
+	position: absolute;
+	width: 100%;
+	padding-left: 300px;
+	padding-right: 5px;
+	padding-top: 5px;
+	background: #333;	
+}
+
+#desktop .ui-footer {
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	width: 100%;
+}
+
+/* Landscape */
+@media all and (min-device-width : 768px) {
+
+	.main-actions {
+		float: left;
+	}
+
+}
+
+/* ================================ OLD STYLES ================================== */
+
+/* ===== Utilities ===== */
+
+/* Extra Icons */
+.ui-icon-edit {
+	background-image: url(../images/icons/editSmall.png);
+	background-repeat: no-repeat;
+	background-position: center center;	
+}
+
+/* BLANK STATE 
+#blank-state-overlay {
+	position: absolute;
+	width: 100%;	
+	height: 100%;
+	top: 0;
+	background-color: #000;
+	opacity: 0.8;
+
+	z-index: 1002;
+}
+#blank-state {
+	display: block;
+	position: absolute;
+	right: 100px;
+	top: 65px;
+	
+	width: 400px;
+	height: 250px;	
+	border-width: 3px;
+	z-index: 1002;	
+}
+
+/* creates triangle 
+#blank-state:after {
+	content:"";
+	position:absolute;
+	top: -15px; /* value = - border-top-width - border-bottom-width 
+	right: 185px; /* controls horizontal position 
+	
+	border-width:0 15px 15px;
+	border-style:solid;
+	border-color:#b3b3b3 transparent;
+    /* reduce the damage in FF3.0 
+    display: block; 
+    width: 0;
+	z-index: 1003;
+}
+
+#blank-state h1 {
+	line-height: 40px;
+	text-align: center;
+}
+#blank-state h1 strong {
+	background: url(../images/finforeLogo.png) no-repeat scroll left center transparent;
+    display: inline-block;	
+    height: 40px;
+    margin: 5px;
+    text-indent: -9999px;
+    width: 150px;
+}
+#blank-state form {
+	overflow: hidden;
+}
+#blank-state form label {
+	float: left;	
+	margin-top: 10px;
+	
+	color: #666;
+}
+#blank-state form .ui-btn {
+	float: right;
+}
+*/
+
+/* ===== Desktop ===== */
+
+/* Desktop Header Buttons */
+#header-buttons {	
+	float: right;
+	margin: 15px;
+	height: 32px;
+}
+#header-buttons a {
+	overflow: visible;
+	display: block;	
+	float: left;
+	width: 32px;
+	height: 32px;
+	margin-right: 10px;
+	background-position: center center;
+	background-repeat: no-repeat;
+	z-index: 10;
+	
+	text-indent: -9999px;
+	text-decoration: none;
+	opacity: 0.6;
+	cursor: pointer;
+	
+	-moz-transition: opacity 0.3s ease-out;
+	-o-transition: opacity 0.3s ease-out;
+	-webkit-transition: opacity 0.3s ease-out;
+	-ms-transition: opacity 0.3s ease-out;
+	transition: opacity 0.3s ease-out;
+}
+#header-buttons a:hover, #header-buttons a:focus {
+	opacity: 1;
+}
+#header-buttons a:active {
+	position: relative;
+	top: 3px;
+	opacity: 1;
+}
+#header-buttons .add-company-button {
+	background-image: url(../images/icons/addBigIcon.png);
+}
+#header-buttons a#profile-button {
+	background-image: url(../images/icons/userBigIcon.png);
+}
+#header-buttons a#manage-button {
+	background-image: url(../images/icons/columnsBigIcon.png);
+}
+#header-buttons a.help-button {
+	background-image: url(../images/icons/helpBigIcon.png);
+}
+#header-buttons a.logout-button {
+	background-image: url(../images/icons/logoutBigIcon.png);
+}
+#header-buttons .disabled {
+	pointer-events: none;
+	opacity: 0.2;
+}
+/* Selectors For Public Accounts */
+#public-account-selectors {
+	position: relative;
+	float: right;
+	padding: 5px 10px 0 10px;
+	background-color: #3c3c3c;	
+	z-index: 1002;
+	
+	-webkit-border-bottom-left-radius: 5px;
+	-moz-border-radius-bottomleft: 5px;
+	border-bottom-left-radius: 5px;
+}
+#public-account-selectors .ui-btn-text {
+	font-size: 12px;
+}
+#public-account-selectors p {
+	float: left;
+	width: 160px;
+	padding-right: 20px;
+	margin: 5px 0 0 0;
+
+	line-height: 12px;
+	font-size: 13px;
+	font-weight: normal;
+	color: #828282;
+}
+#public-account-selectors > .ui-btn {
+	float: left;
+	margin-top: 10px;
+}
+#public-account-selectors > .ui-btn .ui-btn-inner {
+	padding: 0.5em 25px;
+}
+#public-account-selectors form {
+	overflow: hidden;
+	float: left;	
+}
+#public-account-selectors form .ui-select {
+	width: 100%;	
+}
+#public-account-selectors form .ui-select .ui-btn {
+	width: 110px;	
+}
+#public-account-selectors form .ui-select .ui-btn, #public-account-selectors form .ui-select .ui-btn .ui-btn-inner {
+	-moz-border-radius: 5px !important;
+	-webkit-border-radius: 2px !important;
+	border-radius: 5px !important;
+}
+#public-account-selectors form > div {	
+	float: left;
+	clear: none;	
+	margin: 0;
+	padding: 5px;
+	border: none;
+}
+#public-account-selectors form > div label {
+	clear: both;
+	width: 100%;
+	display: block;
+	
+	font-size: 11px;
+	color: #c9c9c9;
+}
+#public-account-selectors form .ui-btn-inner {
+	padding: 0.1em 35px 0.1em 8px;
+} 
+/* Desktop Title and Logo */
+.desktop-title {
+	position: absolute;	
+	width: 400px;
+	left: 10px;	
+	z-index: 1;
+}
+/* Welcome Message */
+.desktop-title #welcome-message {	
+	display: block;
+	float: left;
+	margin: 25px 0 0 0;
+	
+	font-size: 12px;
+}
+.desktop-title #welcome-message strong {
+	color: #5D9FE2;
+}
+
+/* Signin Buttons 
+#signin-actions {
+	display: block;
+	overflow: visible;
+	z-index: 2;
+}
+*/
+
+/* iPad Fix */
+@media only screen and (-webkit-min-device-pixel-ratio:0) {
+    .tab {
+		-webkit-box-sizing: border-box;
+		padding-bottom: 8px;
+	}
+}
+
+/* Tab Bar 
+#tabs-container {
+	float: left;
+	position: absolute;
+	left: 0;
+	bottom: 0;
+	width: 100%;
+}
+#tab-bar {
+	float: left;
+	position: relative;
+	top: 2px;
+	overflow: hidden;
+}
+#tab-bar ul {
+	float: left;
+	position: relative;
+		
+	-moz-transition: left 0.3s ease-out;  
+	-o-transition: left 0.3s ease-out;  
+	-webkit-transition: left 0.3s ease-out;  
+	-ms-transition: left 0.3s ease-out;  
+	transition: left 0.3s ease-out;  
+}
+#tab-bar ul li {	
+	position: relative;
+	clear: none;
+	float: left;
+	width: 200px;	
+	overflow: hidden;
+		
+	-webkit-transition: width 0.1s ease-out, top 0.1s ease-out;
+	-moz-transition: width 0.1s ease-out, top 0.1s ease-out;
+	-o-transition: width 0.1s ease-out, top 0.1s ease-out;
+	transition: width 0.1s ease-out, top 0.1s ease-out;	
+}
+#tab-bar ul li a {
+	margin-right: 1px;
+}
+#tab-bar ul li a, #tab-bar ul li a span, #tabs-container > a, #tabs-container > a > span {
+	-webkit-border-top-left-radius: 5px;
+	-webkit-border-top-right-radius: 5px;
+	-moz-border-radius-topleft: 5px;
+	-moz-border-radius-topright: 5px;
+	border-top-left-radius: 5px;
+	border-top-right-radius: 5px;
+}
+#tab-bar ul li a.ui-btn-active:after {
+	content: "";
+	display: block;
+	position: absolute;
+	bottom: 0px;
+	left: 50%;
+	margin-left: -5px;
+	width: 0;
+	height: 0;
+	border-width: 0 5px 5px;
+	border-style: solid;
+	border-color: #2a2a2a transparent;	
+}
+#tab-bar.no-scroll {
+	clear: left;
+	margin-right: 10px;
+}
+#tab-bar.no-scroll ul li:last-of-type span, #tab-bar.no-scroll ul li:last-of-type a {
+	-webkit-border-top-right-radius: 5px;
+	-moz-border-radius-topright: 5px;
+	border-top-right-radius: 5px;
+}
+#add-tab-button {
+	position: relative;
+	float: left;
+	top: 0;
+	left: 0;	
+	padding: 0.5em 0;
+	
+	-moz-border-radius: 5px 5px 0px 0px;
+	-webkit-border-radius: 5px 5px 0px 0px;
+	border-radius: 5px 5px 0px 0px;
+}
+
+
+/* Tab Close Button 
+#tab-bar li .tab-close-button {
+	display: none;
+	position: absolute;
+	top: 9px;	
+	right: 5px;
+	
+	background-color: transparent;
+	box-shadow: none;
+	opacity: 0.8;
+	cursor: pointer;
+}
+#tab-bar li:hover .tab-close-button {
+	display: block;
+}
+#tab-bar li .tab-close-button:hover {
+	background-color: rgba(0, 0, 0, 0.4);
+	box-shadow: 0 1px 0 rgba(255, 255, 255, 0.4);
+	opacity: 1;
+}
+
+/* Tab Scrollers 
+#tab-scroll-left {
+	clear: left;	
+}
+#tab-scroll-left, #tab-scroll-right {
+	display: none;
+	float: left;
+	position: relative;
+	top: 0;
+	left: auto;
+	
+	-moz-border-radius: 0;
+	-webkit-border-radius: 0;
+	border-radius: 0;
+	
+	padding: 0.5em 0;
+}
+
+/* Tab List Selector 
+#desktop > .ui-header > .ui-select {
+	position: absolute;
+	right: 0;
+	bottom: 0;
+	width: auto;
+}
+#desktop #tab-list-selector-button {
+	top: 0 !important;
+	padding: 0.5em 3px 0.5em 6px;
+	
+	-moz-border-radius: 5px 0px 0px 0px;
+	-webkit-border-radius: 5px 0px 0px 0px;
+	border-radius: 5px 0px 0px 0px;
+}
+#desktop #tab-list-selector-button .ui-btn-inner {
+	padding: 0;
+}
+#tab-list-selector-menu {
+	overflow-x: hidden;
+	overflow-y: auto;
+	max-height: 300px;
+	
+	font-size: 12px;
+}
+#desktop > .ui-selectmenu:last-of-type {
+	display: block;
+	top: 100px !important;
+	right: 0 !important;
+	left: auto !important;	
+	width: 190px;	
+	
+	-moz-border-radius: 0 0px 0px 5px;
+	-webkit-border-radius: 0 0px 0px 5px;
+	border-radius: 0 0px 0px 5px;
+	
+	z-index: 1001 !important;
+}
+.ui-selectmenu-hidden {
+	display: none !important;
+}
+*/
+
+/* Tab Content */
+.tab {
+	position: relative;
+	left: 0;
+	z-index: 1001;
+	height: 100%;
+	display: none;
+	overflow-y: hidden;
+	overflow-x: auto;
+	background-color: #F0F0F0;
+}
+
+.active-tab {
+	display: block;
+}
+
+/* iScroll Container */
+.tab-scroller {	
+	position: relative;	
+	height: 100%;
+	white-space: nowrap;
+}
+
+/* Panels */
+.panel {
+	position: relative;	
+	z-index: 999;		
+	
+	display: inline-block;
+	table-layout: fixed;
+	height: 100%;
+	width: 300px;
+	padding-top: 45px;
+	overflow: hidden;
+	border-right: 1px solid #333;
+	
+	white-space: normal;
+	vertical-align:top;
+		
+	-moz-box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	box-sizing: border-box;	
+}
+
+.panel > [data-role="header"] {
+	position: absolute;
+	top: 0;
+	height: 43px;
+	width: inherit;
+	overflow: hidden;
+}
+
+.panel > [data-role="content"], .panel-content-wrap .ui-content {	
+	height: 100%;
+	padding: 0;	
+	overflow-x: hidden;
+	overflow-y: auto;
+}
+
+.panel .panel-back-button {
+	display: none;
+}
+
+.panel .ui-controlgroup {
+	margin: 0;
+}
+
+.panel a {
+	color: #375DDB;	
+}
+
+.tab .panel:last-of-type {
+	border: 0;
+}
+
+
+
+/* Custom Webkit Scrollbars */
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+	color: #000;
+}
+::-webkit-scrollbar-button:start:decrement,
+::-webkit-scrollbar-button:end:increment {
+    display: block;
+    height: 10px;
+	color: #000;	
+}
+::-webkit-scrollbar-track-piece {
+    background-color: #eee;	
+    -webkit-border-radius: 5px;
+}
+::-webkit-scrollbar-thumb:vertical {
+    height: 50px;
+    background-color: #888;	
+    -webkit-border-radius: 5px;
+}
+::-webkit-scrollbar-thumb:vertical:hover,
+::-webkit-scrollbar-thumb:horizontal:hover {
+	background-color: #000;
+}
+::-webkit-scrollbar-thumb:horizontal {
+    width: 50px;
+	margin: 2px;
+    background-color: #888;
+    -webkit-border-radius: 5px;
+}
+
+
+/* ===== TABLET LAYOUT ===== */
+.panel-content-wrap {
+	background-color: #F0F0F0;
+}
+
+.panel-content-wrap .ui-content {
+	height: auto !important;
+}
+
+/* Collapsible Companies */
+.collapsible-company h3 {
+	margin: 0;
+	font-size: 12px;
+}
+.collapsible-company h3 a .ui-btn-corner-all {
+	-webkit-border-radius: 1em;
+	-moz-border-radius: 1em;
+	border-radius: 1em;
+}
+.collapsible-company h3:not(.ui-collapsible-heading-collapsed) a {
+	-webkit-border-bottom-right-radius: 0;
+	-webkit-border-bottom-left-radius: 0;
+	-moz-border-radius-bottomright: 0;
+	-moz-border-radius-bottomleft: 0;
+	border-bottom-right-radius: 0;
+	border-bottom-left-radius: 0;
+}
+.collapsible-company .ui-listview {
+	margin: 0;
+}
+.collapsible-company .ui-listview li:last-child {
+	-webkit-border-bottom-right-radius: .6em;
+	-webkit-border-bottom-left-radius: .6em;
+	-moz-border-radius-bottomright: .6em;
+	-moz-border-radius-bottomleft: .6em;
+	border-bottom-right-radius: .6em;
+	border-bottom-left-radius: .6em;
+}
+.collapsible-company .ui-collapsible-content {
+	padding: 0;
+	margin: 0;
+}
+
+.panel-list {
+	margin: .5em 0;
+}
+.tablet-tab-list {
+	padding-bottom: 20px;
+}
+
+
+/*@media (max-width: 1024px) {*/
+/* ===== Public User ===== */
+
+	/* General 
+	#tabs-container, #desktop > .ui-header > .ui-select {
+		display: none;
+	}
+	
+	.desktop-title #welcome-message {
+		display: none;
+	}	
+	*/
+	
+	/* Public Account Selectors 
+	#public-account-selectors {
+		float: none;
+		overflow: hidden;
+		left: 5px;
+		top: 100px;
+		
+		width: 200px !important;
+		padding: 5px;
+		
+		background-color: transparent;
+	}
+	#public-account-selectors form > div label {
+		font-size: 12px;
+	}
+	#public-account-selectors form .ui-select .ui-btn {
+		width: 100%;
+	}
+	#public-account-selectors form > div {
+		float: none;
+	}
+	#public-account-selectors p {
+		width: auto;
+		padding: 5px 0;
+	}
+	#public-account-selectors form {
+		float: left;
+		width: 100%;
+	}
+	#public-account-selectors > .ui-btn {
+		float: none;
+		width: 100%;
+		margin-top: 0;
+	}
+	#public-account-selectors > .ui-btn:last-child {
+		margin-top: 5px;
+	}
+	*/
+	
+	/* Blank State 
+	#blank-state {
+		top: 180px;
+		right: auto;
+		left: -5px;
+	}
+	*/
+	
+	/* Panels */
+	
+	
+	/* Tablet Tabs */
+	.tablet-tab-selector {
+		/*
+		position: absolute;
+		top: 180px;
+		left: 0;
+		z-index: 1000;
+		*/
+		
+		display: block;
+		width: 210px;
+		height: 470px;	
+		padding: 5px;
+		overflow: auto;		
+	}
+	
+	/* Tab Content */
+	.tab {
+		height: 98%;
+		
+		border: 1px solid #2a2a2a;
+		background-image: url(../images/panelHeaderTile.png);
+		background-repeat: repeat-x;
+		background-position: top left;
+		
+		background-clip: padding-box;
+		
+		-moz-border-radius: 5px;
+		-webkit-border-radius: 5px;
+		border-radius: 5px;
+		
+		-moz-box-shadow: 0px 1px 4px rgba(0,0,0,.3);
+		-webkit-box-shadow: 0px 1px 4px rgba(0,0,0,.3);
+		box-shadow: 0px 1px 4px rgba(0,0,0,.3);
+	}
+
+	/* Signin Actions 
+	#signin-actions {
+		left: 10px;
+		top: 60px;
+		width: 220px;
+	}	
+
+	/* Sign-in Buttons 
+	#signin-actions > a {
+		width: 98px;
+	}
+	
+	#signin-actions > a.ui-corner-left {
+		-moz-border-radius-topleft: 0;
+		-webkit-border-top-left-radius: 0;
+		border-top-left-radius: 0;
+	}
+	
+	#signin-actions > a.ui-corner-right {
+		-moz-border-radius-topright: 0;
+		-webkit-border-top-right-radius: 0;
+		border-top-right-radius: 0;
+	}
+	
+	#signin-actions .ui-btn-inner {
+		border-top: none;
+	}
+	*/
+	
+	/* Logo 
+	.desktop-title {
+		width: 210px;
+	}
+	.desktop-title h1 {
+		float: none !important;
+		margin: 9px auto !important;
+	}
+	*/
+
+	/* Header moved to the Left */
+	#desktop > .ui-header {		
+		position: relative;
+		left: 0;
+		width: 215px;
+		z-index: 1001;
+		
+		height: 60px !important;
+		overflow: visible;
+		
+		-webkit-border-bottom-right-radius: 5px;
+		-moz-border-radius-bottomright: 5px;
+		border-bottom-right-radius: 5px;		
+	}
+
+	#header-buttons {
+		float: none;
+		height: auto;
+		margin: 80px 15px 0 15px;
+	}
+	#header-buttons a {
+		margin-bottom: 10px;
+	}	
+	
+	
+	/* ===== Registered User ===== */
+	.registered-user .desktop-title {
+		width: 40px;
+	}
+	
+	.registered-user .desktop-title h1 {
+		width: 40px !important;
+	}
+	
+	.registered-user #desktop > .ui-header {
+		height: 100% !important;
+		width: 60px !important;
+		
+		-webkit-border-radius: 0px;
+		-moz-border-radius: 0px;
+		border-radius: 0px;
+		
+		border-right: 1px solid #222;
+	}
+
+	.registered-user .tablet-tab-selector {
+		left: 60px;
+		top: 0;
+		height: 645px;		
+		background: none;		
+	}
+	
+	.registered-user #desktop-content {
+		padding: 0 0 40px 300px;
+	}
+	
+/*}*/
+
+
+/* Narrow tablets or Portrait orientation 
+@media all and (max-width: 768px) {
+	
+/* ===== Registered User ===== */
+	/* Header 
+	.tablet-tab-selector {
+		height: 720px;
+	}
+	.registered-user .desktop-title {
+		width: 140px;
+	}
+	
+	.registered-user .desktop-title h1 {
+		width: 140px !important;
+	}
+	
+	.registered-user #desktop > .ui-header {
+		height: 60px !important;
+		width: 100% !important;
+		
+		-moz-box-shadow: 0 1px 5px #333;
+		-webkit-box-shadow: 0 1px 5px #333;
+		box-shadow: 0 1px 5px #333;
+	}
+	
+	.registered-user #header-buttons {
+		float: right;
+		margin: 15px;
+		height: 32px;
+	}
+	
+	.registered-user #desktop-content {
+		padding: 60px 0 40px 250px;
+	}
+	
+	.registered-user .tablet-tab-selector {
+		top: 60px;
+		left: 0;
+		height: 840px;
+	}
+	
+}
+*/
+
+/* Larger Screens */
+@media (min-width: 1025px) {
+	
+	/* Panel Controlgroup */
+	.panel .ui-header .ui-controlgroup {
+		position: absolute;
+		top: 5px;
+		right: 5px;	
+		opacity: 0;
+		
+		-moz-transition: all 0.2s ease-out;
+		-o-transition: all 0.2s ease-out;
+		-webkit-transition: all 0.2s ease-out;
+		transition: all 0.2s ease-out;
+		
+		-webkit-transform: translateX(30px);
+		-moz-transform: translateX(30px);
+		-o-transform: translateX(30px);
+		transform: translateX(30px);	
+	}
+
+	/* Panel Slider Controls */
+	.panel-slider-controls {
+		position: absolute;	
+		width: inherit;
+		margin: 0;
+		bottom: 0;	
+		z-index: 9999;
+	}
+
+	.panel-slider-controls .ui-btn:last-child {
+		float: right;	
+		
+		border-width: 1px 0 0 1px;
+		-moz-border-radius: 5px 0 0 0;
+		-webkit-border-radius: 5px 0 0 0;
+		border-radius: 5px 0 0 0;
+	}
+
+	.panel-slider-controls .ui-btn {
+		float: left;
+		margin: 0;
+		padding: 5px;
+		
+		border-width: 1px 1px 0 0;
+		-moz-border-radius: 0 5px 0 0;
+		-webkit-border-radius: 0 5px 0 0;
+		border-radius: 0 5px 0 0;
+	}
+
+	/* Panel Sortable Helper */
+	.panel.ui-sortable-helper {
+		-moz-box-sizing: content-box;
+		-webkit-box-sizing: content-box;
+		box-sizing: content-box;
+		
+		border: 5px solid hsla(210, 57%, 74%, 0.55);	
+	}
+	
+}

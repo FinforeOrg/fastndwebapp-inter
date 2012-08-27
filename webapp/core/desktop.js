@@ -883,6 +883,15 @@ finfore.desktop = function() {
 			}); 
 		};
 
+		// bind vclick event to the form, because iScroll was preventing tap-ing the input
+		var $filterInput = $('input', nodes.$mobileAddCompany.siblings('form'));
+		
+		if(touchSupport) {
+			nodes.$mobileAddCompany.siblings('form').bind('vclick', function() {
+				$filterInput.focus();
+			});
+		}
+		
 		// facebook-like inline company search autocomplete
 		WebService.getCompanies({
 			success: function (companies) {
@@ -899,11 +908,7 @@ finfore.desktop = function() {
 
 				$('li', nodes.$mobileAddCompany).on('click', finfore.addcompany.saveCompany);
 
-				
 				nodes.$mobileAddCompany.listview('refresh');
-
-				
-				var $filterInput = $('input', nodes.$mobileAddCompany.siblings('form'));
 				
 				// unbind jquery mobile fitlers
 				$filterInput.unbind('keyup change');
@@ -917,8 +922,7 @@ finfore.desktop = function() {
 					'max-height': $bodyHeight + 'px',
 					'overflow-y': 'auto'
 				});
-
-
+				
 				// rewrite jquery mobile filters
 				$filterInput.bind('keyup change', function() {
 					
@@ -985,11 +989,9 @@ finfore.desktop = function() {
 								.toggleClass( "ui-filter-hidequeue", false );
 
 						} else {
+						
 							//change theme color for list items
-							
 							list.find('.ui-body-c').removeClass('ui-body-c').addClass('ui-body-a');
-
-
 
 							//filtervalue is empty, hide list
 							list.addClass( "hide-mobile-companies");

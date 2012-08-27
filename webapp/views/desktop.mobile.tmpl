@@ -1,99 +1,19 @@
-<div class="main-page {{if user && user.is_public}}public-user{{/if}}" data-role="page">
-	<div data-role="header" class="desktop-title">
-		<h1>FastND</h1>
-		{{if user && user.is_public}}
-			<a data-role="button" class="signin-button ui-btn-right" data-theme="a">Sign In</a> 
-		{{/if}}
-		
-		{{if user && !user.is_public}}
-			<div class="header-buttons">
-				{{if user && !user.is_public}}
-					<a ontouchstart="" class="add-tab-button">Lookup Company</a>
-				{{/if}}
-				<a ontouchstart="" class="logout-button">Logout</a>
-			</div>
-		{{/if}}
-	</div>
-	<div data-role="content"></div>
-</div>
-
-<div class="main-columns columns-container" data-backpage="main-page"></div>
-<div class="companies-columns columns-container" data-backpage="companies-page"></div>
-<div class="stocks-columns columns-container" data-backpage="stocks-page"></div>
-
-<div data-role="navbar" class="mobile-navbar">
-	<ul>
-		<li><a class="main-icon main-button ui-btn-active" data-icon="custom" data-theme="a">Main</a></li>
-		<li><a class="stocks-icon stocks-button" data-icon="custom" data-theme="a">Stocks</a></li>
-		<li><a class="companies-icon companies-button" data-icon="custom" data-theme="a">Companies</a></li>
-		
-		{{if user && !user.is_public}}
-			<li><a class="alerts-icon alerts-button" data-icon="custom" data-theme="a">Alerts</a></li>
-		{{else}}
-			<li><a class="lookup-icon lookup-button" data-icon="custom" data-theme="a">Lookup</a></li>
-		{{/if}}
-		
-	</ul>
-</div>
-
-<div class="companies-page ui-page" data-role="page">
-	<div data-role="header" class="desktop-title">
-		<h1>FastND</h1>
-		{{if user && user.is_public}}
-			<a data-role="button" class="signin-button ui-btn-right" data-theme="a">Sign In</a> 
-		{{/if}}
-		
-		{{if user && !user.is_public}}
-			<div class="header-buttons">
-				{{if user && !user.is_public}}
-					<a ontouchstart="" class="add-tab-button">Lookup Company</a>
-				{{/if}}
-				<a ontouchstart="" class="logout-button">Logout</a>
-			</div>
-		{{/if}}
-	</div>
-	<div data-role="content"></div>
-</div>
-
-<div class="stocks-page ui-page" data-role="page">
-	<div data-role="header" class="desktop-title">
-		<h1>FastND</h1>
-		{{if user && user.is_public}}
-			<a data-role="button" class="signin-button ui-btn-right" data-theme="a">Sign In</a> 
-		{{/if}}
-		
-		{{if user && !user.is_public}}
-			<div class="header-buttons">
-				{{if user && !user.is_public}}
-					<a ontouchstart="" class="add-tab-button">Lookup Company</a>
-				{{/if}}
-				<a ontouchstart="" class="logout-button">Logout</a>
-			</div>
-		{{/if}}
-	</div>
-	<div data-role="content"></div>
-</div>
+<div class="main-columns columns-container"></div>
+<div class="companies-columns columns-container"></div>
+<div class="stocks-columns columns-container"></div>
 
 {{if user && !user.is_public}}
 	<div id="mobile-updates" data-role="page">
-		<div data-role="header" class="desktop-title">
-			<h1>FastND</h1>
-			{{if user && user.is_public}}
-				<a data-role="button" class="signin-button ui-btn-right" data-theme="a">Sign In</a> 
-			{{/if}}
-			
-			{{if user && !user.is_public}}
-				<div class="header-buttons">
-					{{if user && !user.is_public}}
-						<a ontouchstart="" class="add-tab-button">Lookup Company</a>
-					{{/if}}
-					<a ontouchstart="" class="logout-button">Logout</a>
-				</div>
-			{{/if}}
+		<div data-role="header">	
+			<a data-role="button" data-inline="true" data-icon="menu" data-theme="a" data-iconpos="notext" class="mobile-menu-button">Menu</a>
+			<h1>Alerts</h1>
 		</div>
 		<div data-role="content">
 			<div class="mobile-update-list"></div>
 		</div>
+		{{if smallScreen}}
+			<div class="mobile-content-overlay"></div>
+		{{/if}}
 	</div>
 {{/if}}
 
@@ -138,3 +58,37 @@
 	</div>	
 </div>
 {{/if}}
+
+<div data-role="page" data-theme="a" class="menu-page">
+	<div data-role="header" class="desktop-title">
+		<div class="refresh-columns-button">
+			<div class="refresh-logo"></div>
+			<h1>FastND</h1>
+		</div>
+		
+		{{if user && user.is_public}}
+			<a data-role="button" class="signin-button ui-btn-right" data-theme="a">Sign In</a> 
+		{{/if}}
+		
+		{{if user && !user.is_public}}
+			<div class="header-buttons">
+				<a ontouchstart="" class="logout-button">Logout</a>
+			</div>
+		{{/if}}
+	</div> <!-- desktop-title -->
+	<div data-role="content">
+		
+		<ul data-role="listview" data-filter="true" class="mobile-addcompany hide-mobile-companies companies-list" data-filter-theme="a" data-filter-placeholder="Search companies..."></ul>
+		
+		<ul data-role="listview" class="mobile-menu split-selector" data-split-theme="a">
+			{{if user && !user.is_public}}
+				<li><a>${user.full_name}</a><a class="mobile-column-select profile-button"></a></li>
+				<li><a>Alerts</a><a class="alerts-button mobile-column-select"></a></li>
+			{{/if}}
+			{{if user && user.is_public}}
+				<li><a>Try a Public Account</a><a class="mobile-column-select public-account-btn"></a></li>
+			{{/if}}
+		</ul>
+		
+	</div> <!-- content -->
+</div> <!-- menu-page -->
