@@ -1,0 +1,28 @@
+<input type="radio" data-native="true" name="${category}-sources-${feed_account_id}" data-index="${index}" id="source-${feed_account_id}-${source._id}" data-id="${source._id}" data-role="none">
+<label for="source-${feed_account_id}-${source._id}" class="clearfix">
+
+{{if source.feed_info}} ${source.feed_info.title} {{else}} ${source.name} {{/if}}
+<a 
+	href="#" 
+	data-role="button" 
+	class="remove-source right ui-btn ui-btn-inline ui-shadow ui-btn-corner-all ui-btn-icon-notext ui-btn-up-c" 
+	data-iconpos="notext" 
+	data-icon="delete" 
+	data-inline="true">
+	<span class="ui-btn-inner ui-btn-corner-all">
+		<span class="ui-btn-text">Unfollow User</span>
+		<span class="ui-icon ui-icon-delete ui-icon-shadow">&nbsp;</span>
+	</span>
+	
+</a>
+
+<!-- <a 
+	href="#" 
+	data-role="button" 
+	class="remove-source ui-btn ui-btn-inline ui-shadow ui-btn-corner-all ui-btn-icon-notext ui-btn-up-c" data-iconpos="notext" data-icon="delete" data-inline="true" data-corners="true" data-shadow="true" data-iconshadow="true" data-wrapperels="span" data-theme="c" title="Remove Source">
+	<span class="ui-btn-inner ui-btn-corner-all">
+		<span class="ui-btn-text">Remove Source</span>
+		<span class="ui-icon ui-icon-delete ui-icon-shadow">&nbsp;</span>
+	</span>
+</a> -->
+</label>
